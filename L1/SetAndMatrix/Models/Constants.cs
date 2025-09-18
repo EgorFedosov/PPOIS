@@ -1,4 +1,4 @@
-namespace SetAndMatrix.Services;
+namespace SetAndMatrix.Models;
 
 public static class Constants
 {

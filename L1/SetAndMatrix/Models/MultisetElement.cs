@@ -1,4 +1,4 @@
-namespace SetAndMatrix.Models.Multiset;
+namespace SetAndMatrix.Models;
 
 public class MultisetElement
 {
