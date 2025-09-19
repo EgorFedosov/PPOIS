@@ -30,8 +30,11 @@ public class Matrix(int rows, int columns) : IMatrix
         Array.Copy(other._data, _data, other._data.Length);
     }
 
-    public Matrix LoadFromFile(string path)
+    public Matrix LoadFromFile(string? path)
     {
+        if(String.IsNullOrWhiteSpace(path))
+            throw new ArgumentException();
+        
         ValidateFile(path);
 
         var lines = File.ReadAllLines(path);
@@ -138,9 +141,9 @@ public class Matrix(int rows, int columns) : IMatrix
 
     public bool IsZero()
     {
-        for (int i = 0; i < Columns; i++)
+        for (int i = 0; i < Rows; i++)
         {
-            for (int j = 0; j < Rows; j++)
+            for (int j = 0; j < Columns; j++)
             {
                 if (this[i, j] != 0) return false;
             }

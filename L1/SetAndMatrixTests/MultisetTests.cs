@@ -5,7 +5,7 @@ using SetAndMatrix.Models;
 public class MultisetTests
 {
     [Fact]
-    public void MultisetElement_StringConstructor_SetsElementCorrectly()
+    public void StringElement_CreatedCorrectly()
     {
         MultisetElement element = new MultisetElement("test");
         Assert.Equal("test", element.Element);
@@ -13,7 +13,7 @@ public class MultisetTests
     }
 
     [Fact]
-    public void MultisetElement_NestedMultisetConstructor_SetsNestedCorrectly()
+    public void NestedElement_CreatedCorrectly()
     {
         Multiset nestedMultiset = new Multiset();
         MultisetElement element = new MultisetElement(nestedMultiset);
@@ -21,16 +21,15 @@ public class MultisetTests
         Assert.Null(element.Element);
     }
 
-
     [Fact]
-    public void Multiset_ToString_HandlesEmptyMultiset()
+    public void EmptyMultiset_ToString_ReturnsEmptyBraces()
     {
         Multiset multiset = new Multiset();
         Assert.Equal("{}", multiset.ToString());
     }
 
     [Fact]
-    public void Multiset_Parse_HandlesNestedMultiset()
+    public void Parse_NestedMultiset_WorksCorrectly()
     {
         Multiset multiset = new Multiset();
         Multiset parsed = multiset.Parse("{a,{x,y}}");
@@ -38,7 +37,14 @@ public class MultisetTests
     }
 
     [Fact]
-    public void Multiset_Parse_HandlesMixedElements()
+    public void Parse_SimpleElements_WorksCorrectly()
+    {
+        Multiset multiset = new Multiset("{a,b}");
+        Assert.Equal("{a,b}", multiset.ToString());
+    }
+
+    [Fact]
+    public void Parse_MixedElements_WorksCorrectly()
     {
         Multiset multiset = new Multiset();
         Multiset parsed = multiset.Parse("{alpha,{1},beta}");
@@ -46,7 +52,7 @@ public class MultisetTests
     }
 
     [Fact]
-    public void Multiset_Parse_ThrowsOnInvalidInput()
+    public void Parse_InvalidInput_ThrowsExceptions()
     {
         Multiset multiset = new Multiset();
         Assert.Throws<InvalidOperationException>(() => multiset.Parse("{a,,b}"));

@@ -2,7 +2,8 @@ namespace SetAndMatrix.Models;
 
 using System.Text;
 using Interfaces;
-public class Multiset:IMultiset
+
+public class Multiset : IMultiset
 {
     private readonly List<MultisetElement> _elements = [];
     private void Add(MultisetElement element) => _elements.Add(element);
@@ -13,7 +14,8 @@ public class Multiset:IMultiset
 
     public Multiset(string set)
     {
-        Parse(set);
+        var multiSet = Parse(set);
+        _elements = multiSet._elements;
     }
 
     public override string ToString()
