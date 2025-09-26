@@ -12,9 +12,9 @@ public abstract class Animal(string name, int age, Place place, Product product,
     private int _hunger;
 
     protected string Name { get; } = name;
-    protected int Age { get; } = age;
-    protected Place Place { get; private set; } = place;
-    protected Product Product { get; } = product;
+    private int Age { get; } = age;
+    private Place Place { get; set; } = place;
+    private Product Product { get; } = product;
 
     private string Sound => config.Sound;
     private int MaxFoodIntake => config.MaxFoodIntake;
@@ -26,16 +26,16 @@ public abstract class Animal(string name, int age, Place place, Product product,
         set => _hunger = Math.Clamp(value, config.MinHungry, config.MaxHungry);
     }
 
-    protected int Productivity
+    private int Productivity
     {
         get => _productivity;
         set => _productivity = Math.Clamp(value, config.MinProductivity, config.MaxProductivity);
     }
 
-    protected int Health
+    private int Health
     {
         get => _health;
-        private set => _health = Math.Clamp(value, config.MinHealth, config.MaxHealth);
+        set => _health = Math.Clamp(value, config.MinHealth, config.MaxHealth);
     }
 
     protected virtual void Update()

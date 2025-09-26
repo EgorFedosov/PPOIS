@@ -2,7 +2,8 @@ using Farm.Products;
 
 namespace Farm.Animal;
 
-public class Duck : Animal
+public class Duck(string name, int age, Place.Place place, Product product)
+    : Animal(name, age, place, product, DuckConfig)
 {
     private static readonly AnimalConfig DuckConfig = new AnimalConfig
     {
@@ -13,7 +14,4 @@ public class Duck : Animal
         DirtinessPerToilet = 1f,
         Sound = "Quack"
     };
-
-    public Duck(string name, int age, Place.Place place, Product product)
-        : base(name, age, place, product, DuckConfig) { }
 }
