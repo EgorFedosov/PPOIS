@@ -2,12 +2,12 @@ using Farm.Interface;
 
 namespace Farm.Place;
 
-public class Place
+public abstract class Place
 {
     protected string? PlaceName { get; set; }
     protected uint PlaceId { get; set; }
     protected uint Area { get; set; }
-    protected float Dirtiness { get; set; }
+    private float Dirtiness { get; set; }
     private readonly List<IPlaceable> _entities = new();
 
     public void AddEntity(IPlaceable entity) => _entities.Add(entity);
