@@ -1,84 +1,57 @@
-using Farm.Products;
 using Farm.Interface;
+using Farm.Products;
 
 namespace Farm.Animal;
-using Place;
 
-public abstract class Animal(string name, int age, Place place, Product product, AnimalConfig config)
+public abstract class Animal(AnimalConfig config)
     : IPlaceable
 {
-    private int _health;
-    private int _productivity;
-    private int _hunger;
-
-    protected string Name { get; } = name;
-    private int Age { get; } = age;
-    private Place Place { get; set; } = place;
-    private Product Product { get; } = product;
-
-    private string Sound => config.Sound;
-    private int MaxFoodIntake => config.MaxFoodIntake;
-    private float DirtinessPerToilet => config.DirtinessPerToilet;
-
-    private int Hunger
+    protected void Update()
     {
-        get => _hunger;
-        set => _hunger = Math.Clamp(value, config.MinHungry, config.MaxHungry);
-    }
+        config.Hunger -= 1;
 
-    private int Productivity
-    {
-        get => _productivity;
-        set => _productivity = Math.Clamp(value, config.MinProductivity, config.MaxProductivity);
-    }
+        if (config.Hunger <= config.LowHungerThreshold1) config.Productivity -= config.ProductivityPenalty1;
+        if (config.Hunger <= config.LowHungerThreshold2) config.Productivity -= config.ProductivityPenalty2;
+        if (config.Hunger <= config.LowHungerThreshold3) config.Productivity -= config.ProductivityPenalty3;
 
-    private int Health
-    {
-        get => _health;
-        set => _health = Math.Clamp(value, config.MinHealth, config.MaxHealth);
-    }
-
-    protected virtual void Update()
-    {
-        Hunger -= 1;
-        if (Hunger <= 30) Productivity -= 1;
-        if (Hunger <= 20) Productivity -= 3;
-        if (Hunger <= 10) Productivity -= 7;
-
-        if (Hunger == 0)
+        if (config.Hunger == 0)
         {
-            Health = config.MinHealth;
-            Productivity = config.MinProductivity;
+            config.Health = config.MinHealth;
+            config.Productivity = config.MinProductivity;
         }
 
-        Productivity = CalculateProductivityByAgeAndHealth(Age, Health,
-            config.YoungAgeLimit, config.AdultAgeLimit, config.OldAgeLimit);
+        config.Productivity = CalculateProductivityByAgeAndHealth();
 
-        Product.Produce(Productivity);
+        //TODO Добавить кастомное исключение
+        config.Product?.Produce(config.Productivity);
     }
 
-    protected virtual void Eat(int amount)
+    protected void Eat(int amount)
     {
-        Hunger += Math.Min(amount, MaxFoodIntake);
+        config.Hunger += Math.Min(amount, config.MaxFoodIntake);
     }
 
-    public virtual void GoToToilet() => Place.IncreaseDirtiness(DirtinessPerToilet);
-    public virtual void MakeSound() => Console.WriteLine(Sound);
+    //TODO добавить кастомное исключение
+    public void GoToToilet() => config.Place?.IncreaseDirtiness(config.DirtinessPerToilet);
+    public void MakeSound() => Console.WriteLine(config.Sound);
 
-    protected virtual int CalculateProductivityByAgeAndHealth(int age, int health, int youngAgeLimit, int adultAgeLimit, int oldAgeLimit)
+    private int CalculateProductivityByAgeAndHealth()
     {
-        int prod = age <= youngAgeLimit ? 30 :
-                   age <= adultAgeLimit ? config.MaxProductivity :
-                   age <= oldAgeLimit ? 70 : 20;
+        int prod = config.Age <= config.YoungAgeLimit ? config.ProductivityYoung :
+            config.Age <= config.AdultAgeLimit ? config.MaxProductivity :
+            config.Age <= config.OldAgeLimit ? config.ProductivityMiddle : config.ProductivityOld;
 
-        return Math.Clamp(prod - (config.MaxHealth - health) / 2, config.MinProductivity, config.MaxProductivity);
+        return Math.Clamp(prod - (config.MaxHealth - config.Health) / 2, config.MinProductivity,
+            config.MaxProductivity);
     }
-    public void MoveTo(Place? newPlace)
-    {
-        if (newPlace == null || Place == newPlace) return;
 
-        Place.RemoveEntity(this);
+    // TODO Разобраться с PLACEPLACE
+    public void MoveTo(Place.Place? newPlace)
+    {
+        if (newPlace == null || config.Place == newPlace) return;
+        //TODO добавить кастомное исключение
+        config.Place?.RemoveEntity(this);
         newPlace.AddEntity(this);
-        Place = newPlace;
+        config.Place = newPlace;
     }
 }

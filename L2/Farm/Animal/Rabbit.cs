@@ -2,16 +2,25 @@ using Farm.Products;
 
 namespace Farm.Animal;
 
-public class Rabbit(string name, int age, Place.Place place, Product product)
-    : Animal(name, age, place, product, RabbitConfig)
+public class Rabbit() : Animal(RabbitConfig)
 {
     private static readonly AnimalConfig RabbitConfig = new AnimalConfig
     {
-        YoungAgeLimit = 1,
+        Name = "Rabbit",
+        Sound = "Squeak",
+        MaxFoodIntake = 1,
+        DirtinessPerToilet = 2,
+        MinHungry = 0,
+        MaxHungry = 100,
+        MinProductivity = 1,
+        MaxProductivity = 5,
+        ProductivityYoung = 2,
+        ProductivityMiddle = 4,
+        ProductivityOld = 1,
+        MinHealth = 0,
+        MaxHealth = 100,
+        YoungAgeLimit = 0,
         AdultAgeLimit = 2,
-        OldAgeLimit = 5,
-        MaxFoodIntake = 5,
-        DirtinessPerToilet = 0.2f,
-        Sound = "Squeak"
+        OldAgeLimit = 4
     };
 }
