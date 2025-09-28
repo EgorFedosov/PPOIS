@@ -1,4 +1,8 @@
-L1/.idea/
+*.user
+*.suo
+*.DotSettings.user
+.idea/
+
 
 L1/SetAndMatrix/bin/
 L1/SetAndMatrix/obj/
