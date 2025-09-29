@@ -1,14 +1,15 @@
 using Farm.Products;
 
-namespace Farm.Animal;
+namespace Farm.Animals;
 
-public class Pig() : Animal(PigConfig)
+public class Pig() : Animals.Animal(PigConfig)
 {
     private static readonly AnimalConfig PigConfig = new AnimalConfig
     {
         Name = "Pig",
         Sound = "Oink",
-        MaxFoodIntake = 7,
+        Product = new Meat(),
+        MaxFoodIntake = 100,
         DirtinessPerToilet = 15,
         MinHungry = 0,
         MaxHungry = 100,
@@ -23,4 +24,12 @@ public class Pig() : Animal(PigConfig)
         AdultAgeLimit = 3,
         OldAgeLimit = 8
     };
+
+    protected override void PerformSpecialAction()
+    {
+        Console.WriteLine($"{PigConfig.Name} роется в грязи — счастье +10 :)");
+        PigConfig.Health += 5;
+        GoToToilet(); 
+    }
+
 }

@@ -1,8 +1,8 @@
 namespace Farm.Products;
 
-public abstract class Product(int maxAmount)
+public abstract class Product(int maxAmount = 100)
 {
-    private int _amount = 0;
+    private int _amount;
 
     private int Amount
     {
@@ -10,12 +10,10 @@ public abstract class Product(int maxAmount)
         set => _amount = Math.Clamp(value, 0, maxAmount);
     }
 
-    public int MaxAmount => maxAmount;
-
     private bool IsFull => _amount >= maxAmount;
-    
 
-    public virtual void Produce(int productivity)
+
+    public void Produce(int productivity)
     {
         if (!IsFull)
             Amount += productivity;

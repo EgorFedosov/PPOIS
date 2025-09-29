@@ -1,6 +1,6 @@
 namespace Farm.Products;
 
-public class Egg
+public class Egg() : Product()
 {
-    
+ 
 }

@@ -1,6 +1,6 @@
 namespace Farm.Products;
 
-public class CropSeed
+public class CropSeed( ) :Product()
 {
     
 }

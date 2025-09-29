@@ -1,6 +1,6 @@
 namespace Farm.Products;
 
-public class Milk
+public class Milk( ) :Product()
 {
     
 }

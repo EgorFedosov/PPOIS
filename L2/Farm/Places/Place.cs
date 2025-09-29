@@ -1,6 +1,6 @@
 using Farm.Interface;
 
-namespace Farm.Place;
+namespace Farm.Places;
 
 public abstract class Place
 {

@@ -1,11 +1,14 @@
 using Farm.Interface;
+using Farm.Places;
 using Farm.Products;
 
-namespace Farm.Animal;
+namespace Farm.Animals;
 
 public abstract class Animal(AnimalConfig config)
     : IPlaceable
 {
+    public Product? Product => config.Product;
+
     protected void Update()
     {
         config.Hunger -= 1;
@@ -29,6 +32,15 @@ public abstract class Animal(AnimalConfig config)
     protected void Eat(int amount)
     {
         config.Hunger += Math.Min(amount, config.MaxFoodIntake);
+        Console.WriteLine($"{config.Name} поел(а)");
+    }
+    public void PrintStats()
+    {
+        Console.WriteLine($"Имя: {config.Name}");
+        Console.WriteLine($"Возраст: {config.Age}");
+        Console.WriteLine($"Здоровье: {config.Health}");
+        Console.WriteLine($"Сытость: {config.Hunger}");
+        Console.WriteLine($"Продуктивность: {config.Productivity}");
     }
 
     //TODO добавить кастомное исключение
@@ -45,8 +57,7 @@ public abstract class Animal(AnimalConfig config)
             config.MaxProductivity);
     }
 
-    // TODO Разобраться с PLACEPLACE
-    public void MoveTo(Place.Place? newPlace)
+    public void MoveTo(Place? newPlace)
     {
         if (newPlace == null || config.Place == newPlace) return;
         //TODO добавить кастомное исключение
@@ -54,4 +65,6 @@ public abstract class Animal(AnimalConfig config)
         newPlace.AddEntity(this);
         config.Place = newPlace;
     }
+
+    protected abstract void PerformSpecialAction();
 }

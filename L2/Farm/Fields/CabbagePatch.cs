@@ -1,4 +1,4 @@
-namespace Farm.Place;
+namespace Farm.Fields;
 
 public class CabbagePatch
 {
