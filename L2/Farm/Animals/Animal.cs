@@ -5,7 +5,7 @@ using Farm.Products;
 namespace Farm.Animals;
 
 public abstract class Animal(AnimalConfig config)
-    : IPlaceable
+    : IAnimal
 {
     public Product? Product => config.Product;
 

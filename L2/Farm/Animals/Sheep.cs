@@ -2,9 +2,9 @@ using Farm.Products;
 
 namespace Farm.Animals;
 
-public class Sheep() : Animals.Animal(SheepConfig)
+public class Sheep(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig SheepConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
     {
         Name = "Sheep",
         Sound = "Baa",
@@ -26,7 +26,7 @@ public class Sheep() : Animals.Animal(SheepConfig)
 
     protected override void PerformSpecialAction()
     {
-        Console.WriteLine($"{SheepConfig.Name} прыгает по полю.");
-        SheepConfig.Productivity += 2;
+        Console.WriteLine($"{DefaultConfig.Name} прыгает по полю.");
+        DefaultConfig.Productivity += 2;
     }
 }

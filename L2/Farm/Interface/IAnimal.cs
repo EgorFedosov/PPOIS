@@ -1,6 +1,6 @@
 namespace Farm.Interface;
 
-public interface IPlaceable
+public interface IAnimal
 {
     //TODO добавить хоть что-то
 }

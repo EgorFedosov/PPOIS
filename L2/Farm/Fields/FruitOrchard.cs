@@ -1,6 +1,5 @@
 namespace Farm.Fields;
 
-public class FruitOrchard
+public class FruitOrchard(FieldConfig config) : Field(config)
 {
-    
 }

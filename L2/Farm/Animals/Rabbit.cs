@@ -2,9 +2,9 @@ using Farm.Products;
 
 namespace Farm.Animals;
 
-public class Rabbit() : Animals.Animal(RabbitConfig)
+public class Rabbit(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig RabbitConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
     {
         Name = "Rabbit",
         Sound = "Squeak",
@@ -27,8 +27,8 @@ public class Rabbit() : Animals.Animal(RabbitConfig)
 
     protected override void PerformSpecialAction()
     {
-        Console.WriteLine($"{RabbitConfig.Name} роет нору.");
-        RabbitConfig.Hunger -= 1;
+        Console.WriteLine($"{DefaultConfig.Name} роет нору.");
+        DefaultConfig.Hunger -= 1;
         GoToToilet();
     }
 }

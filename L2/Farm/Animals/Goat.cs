@@ -2,9 +2,9 @@ using Farm.Products;
 
 namespace Farm.Animals;
 
-public class Goat() : Animals.Animal(GoatConfig)
+public class Goat(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig GoatConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
     {
         Name = "Goat",
         Sound = "Bleat",
@@ -27,8 +27,8 @@ public class Goat() : Animals.Animal(GoatConfig)
 
     protected override void PerformSpecialAction()
     {
-        Console.WriteLine($"{GoatConfig.Name} боднула забор.");
-        GoatConfig.Health -= 2; 
+        Console.WriteLine($"{DefaultConfig.Name} боднула забор.");
+        DefaultConfig.Health -= 2; 
     }
 
 }

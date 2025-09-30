@@ -2,9 +2,9 @@ using Farm.Products;
 
 namespace Farm.Animals;
 
-public class Chicken() : Animals.Animal(ChickenConfig)
+public class Chicken(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig ChickenConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
     {
         Name = "Chicken",
         Sound = "Cluck",
@@ -27,8 +27,7 @@ public class Chicken() : Animals.Animal(ChickenConfig)
 
     protected override void PerformSpecialAction()
     {
-        Console.WriteLine($"{ChickenConfig.Name} копается в земле и ищет червяков!");
-        Eat(5); 
+        Console.WriteLine($"{DefaultConfig.Name} копается в земле и ищет червяков!");
+        Eat(5);
     }
-
 }

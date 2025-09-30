@@ -1,6 +1,6 @@
 using Farm.Interface;
 namespace Farm.Employees;
-public class Employee:IPlaceable
+public class Employee:IAnimal
 {
     
 }
