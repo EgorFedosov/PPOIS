@@ -25,7 +25,7 @@ public class Rabbit(AnimalConfig? config = null) : Animal(config ?? DefaultConfi
         OldAgeLimit = 4
     };
 
-    protected override void PerformSpecialAction()
+    public void DigBurrow()
     {
         Console.WriteLine($"{DefaultConfig.Name} роет нору.");
         DefaultConfig.Hunger -= 1;

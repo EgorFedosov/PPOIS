@@ -25,7 +25,7 @@ public class Chicken(AnimalConfig? config = null) : Animal(config ?? DefaultConf
         OldAgeLimit = 5
     };
 
-    protected override void PerformSpecialAction()
+    public void DigForWorms()
     {
         Console.WriteLine($"{DefaultConfig.Name} копается в земле и ищет червяков!");
         Eat(5);

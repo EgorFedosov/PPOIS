@@ -25,7 +25,7 @@ public class Pig(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         OldAgeLimit = 8
     };
 
-    protected override void PerformSpecialAction()
+    public void RollInMud()
     {
         Console.WriteLine($"{DefaultConfig.Name} роется в грязи — счастье +10 :)");
         DefaultConfig.Health += 5;

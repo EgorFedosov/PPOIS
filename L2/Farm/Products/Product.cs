@@ -1,17 +1,35 @@
 namespace Farm.Products;
 
-public abstract class Product(int maxAmount = 100)
+public abstract class Product(ProductConfig config)
 {
-    // TODO добавить уникальное поведение для каждого продукта(например сделать муку из зерна)
-    private int _amount;
-    public int Amount => _amount;
-    private bool IsFull => _amount >= maxAmount;
+    public int Amount => config.Amount;
+
+    public int Freshness => config.Freshness;
+    public bool Processed => config.Processed;
+
+    protected void Update()
+    {
+        if (config.Damage >= config.LowDamageThreshold1)
+            config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel1);
+        if (config.Damage >= config.LowDamageThreshold2)
+            config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel2);
+        if (config.Damage >= config.LowDamageThreshold3)
+            config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel3);
+
+        if (config.Freshness == 0) config.Amount = 0;
+    }
 
 
     public void Produce(int productivity)
     {
-        if (!IsFull)
-            _amount = Math.Clamp(_amount + productivity, 0, maxAmount);
+        if (config.MaxAmount > config.Amount)
+            config.Amount = Math.Clamp(config.Amount + productivity, 0, config.MaxAmount);
     }
-    public void Reset() => _amount = 0;
+
+    public void Collect()
+    {
+        config.Amount = 0;
+        config.Freshness = 100;
+        config.Processed = false;
+    }
 }

@@ -25,7 +25,7 @@ public class Duck(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         OldAgeLimit = 4
     };
 
-    protected override void PerformSpecialAction()
+    public void Swim()
     {
         Console.WriteLine($"{DefaultConfig.Name} поплавала в пруду.");
         DefaultConfig.Health += 3; 

@@ -44,7 +44,7 @@ public abstract class Animal(AnimalConfig config)
     }
 
     //TODO добавить кастомное исключение
-    public void GoToToilet() => config.Place?.IncreaseDirtiness(config.DirtinessPerToilet);
+    protected void GoToToilet() => config.Place?.IncreaseDirtiness(config.DirtinessPerToilet);
     public void MakeSound() => Console.WriteLine(config.Sound);
 
     private int CalculateProductivityByAgeAndHealth()
@@ -65,6 +65,4 @@ public abstract class Animal(AnimalConfig config)
         newPlace.AddEntity(this);
         config.Place = newPlace;
     }
-
-    protected abstract void PerformSpecialAction();
 }

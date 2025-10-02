@@ -25,7 +25,7 @@ public class Goat(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         OldAgeLimit = 8
     };
 
-    protected override void PerformSpecialAction()
+    public void HeadButtFence()
     {
         Console.WriteLine($"{DefaultConfig.Name} боднула забор.");
         DefaultConfig.Health -= 2; 

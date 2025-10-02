@@ -1,8 +1,26 @@
 namespace Farm.Products;
 
-public class FieldFertilizer( ) :Product()
+public class FieldFertilizer(ProductConfig? config = null) : Product(config ?? DefaultConfig)
 {
-    // Его могут вырабатывать животные, при уборке,
-    //  зависимости на сколько грязно было
-    // получаем удобрениеЮ используем для полей
+    // получаем при уборке полей
+    private static readonly ProductConfig DefaultConfig = new ProductConfig
+    {
+        DamageLevel1 = 1,
+        DamageLevel2 = 1,
+        DamageLevel3 = 2
+    };
+
+    public void Mix()
+    {
+        Console.WriteLine("Удобрение смешано.");
+        var effectiveConfig = config ?? DefaultConfig;
+        effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 5);
+    }
+
+    public void StoreDry()
+    {
+        Console.WriteLine("Удобрение хранится в сухом месте.");
+        var effectiveConfig = config ?? DefaultConfig;
+        effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 1);
+    }
 }

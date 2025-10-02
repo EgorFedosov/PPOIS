@@ -24,7 +24,7 @@ public class Sheep(AnimalConfig? config = null) : Animal(config ?? DefaultConfig
         OldAgeLimit = 10
     };
 
-    protected override void PerformSpecialAction()
+    public void JumpInField()
     {
         Console.WriteLine($"{DefaultConfig.Name} прыгает по полю.");
         DefaultConfig.Productivity += 2;
