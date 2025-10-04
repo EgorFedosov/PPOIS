@@ -5,7 +5,7 @@ namespace Farm.Animals;
 
 public class Pig(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new()
     {
         Name = "Pig",
         Sound = "Oink",
@@ -21,6 +21,7 @@ public class Pig(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         ProductivityOld = 5,
         MinHealth = 0,
         MaxHealth = 100,
+        Age = 2,
         YoungAgeLimit = 1,
         AdultAgeLimit = 3,
         OldAgeLimit = 8
@@ -30,7 +31,6 @@ public class Pig(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
     {
         Console.WriteLine($"{DefaultConfig.Name} роется в грязи — счастье +10 :)");
         DefaultConfig.Health += 5;
-        GoToToilet(); 
+        GoToToilet();
     }
-
 }

@@ -1,13 +1,16 @@
 using Farm.Products;
-using Farm.Interfaces;
 
 namespace Farm.Configs;
 
 public class FieldConfig
 {
+    private const uint MinSeedCount = 0;
+    public const uint MaxSeedCount = 1000;
+    public const int MaxSoilCareLevel = 100;
+
     private int _productivity;
+    private uint _seedCount;
     private int _soilCareLevel;
-    private int _seedCount;
 
     public int Productivity
     {
@@ -21,7 +24,7 @@ public class FieldConfig
         set => _soilCareLevel = Math.Clamp(value, MinSoilCareLevel, MaxSoilCareLevel);
     }
 
-    public int SeedCount
+    public uint SeedCount
     {
         get => _seedCount;
         set => _seedCount = Math.Clamp(value, MinSeedCount, MaxSeedCount);
@@ -29,17 +32,9 @@ public class FieldConfig
 
     public int MinProductivity { get; init; }
     public int MaxProductivity { get; init; }
-    public int MaxSoilCareLevel { get; init; } = 100;
-    public int MinSoilCareLevel { get; init; } = 0;
-    private int MinSeedCount { get; init; } = 0;
-    public int MaxSeedCount { get; init; } = 1000;
-
-    public int SoilCareDecrement { get; init; }
+    public int MinSoilCareLevel { get; init; }
 
 
     public string? Name { get; init; }
     public Product? Product { get; init; }
-
-    public List<IMachine>? Machines { get; init; }
-    public List<IWorker>? Workers { get; init; }
 }

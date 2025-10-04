@@ -5,14 +5,13 @@ namespace Farm.Fields;
 
 public class FruitField(FieldConfig? config = null) : Field(config ?? DefaultConfig)
 {
-    private static readonly FieldConfig DefaultConfig = new FieldConfig
+    private static readonly FieldConfig DefaultConfig = new()
     {
         Name = "Fruit field",
         Product = new Fruit(),
         MinProductivity = 40,
         MaxProductivity = 600,
-        MinSoilCareLevel = 35,
-        SoilCareDecrement = 8
+        MinSoilCareLevel = 35
     };
 
     public void Prune()

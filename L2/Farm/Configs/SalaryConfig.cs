@@ -1,18 +1,92 @@
+using Farm.Employees;
+
 namespace Farm.Configs;
 
 public class SalaryConfig
 {
-    private const decimal MinSalary = 2000;
+    private const decimal MinSalary = 2000m;
 
-    public Dictionary<string, EmployeeLimits> LimitsByType { get; init; } = new()
+    private Dictionary<string, EmployeeSalaryData> LimitsByType { get; } = new()
     {
-        ["Accountant"] = new EmployeeLimits { InternLimit = 80, JuniorLimit = 200, MiddleLimit = 400, SeniorLimit = 700 },
-        ["EquipmentOperator"] = new EmployeeLimits { InternLimit = 120, JuniorLimit = 350, MiddleLimit = 700, SeniorLimit = 1200 },
-        ["Farmer"] = new EmployeeLimits { InternLimit = 100, JuniorLimit = 300, MiddleLimit = 600, SeniorLimit = 1000 },
-        ["FieldWorker"] = new EmployeeLimits { InternLimit = 90, JuniorLimit = 250, MiddleLimit = 500, SeniorLimit = 900 },
-        ["Mechanic"] = new EmployeeLimits { InternLimit = 60, JuniorLimit = 180, MiddleLimit = 350, SeniorLimit = 600 },
-        ["SalesManager"] = new EmployeeLimits { InternLimit = 70, JuniorLimit = 220, MiddleLimit = 450, SeniorLimit = 800 },
-        ["Security"] = new EmployeeLimits { InternLimit = 110, JuniorLimit = 320, MiddleLimit = 650, SeniorLimit = 1100 },
-        ["Veterinarian"] = new EmployeeLimits { InternLimit = 50, JuniorLimit = 150, MiddleLimit = 300, SeniorLimit = 500 }
+        ["Accountant"] = new EmployeeSalaryData
+        {
+            Rates = new Dictionary<EmployeeLevel, int>
+            {
+                [EmployeeLevel.Intern] = 80,
+                [EmployeeLevel.Junior] = 200,
+                [EmployeeLevel.Middle] = 400,
+                [EmployeeLevel.Senior] = 700
+            },
+            PromotionThresholds = [50, 150, 300]
+        },
+        ["EquipmentOperator"] = new EmployeeSalaryData
+        {
+            Rates = new Dictionary<EmployeeLevel, int>
+            {
+                [EmployeeLevel.Intern] = 120,
+                [EmployeeLevel.Junior] = 350,
+                [EmployeeLevel.Middle] = 700,
+                [EmployeeLevel.Senior] = 1200
+            },
+            PromotionThresholds = [40, 120, 250]
+        },
+        ["Farmer"] = new EmployeeSalaryData
+        {
+            Rates = new Dictionary<EmployeeLevel, int>
+            {
+                [EmployeeLevel.Intern] = 100,
+                [EmployeeLevel.Junior] = 300,
+                [EmployeeLevel.Middle] = 600,
+                [EmployeeLevel.Senior] = 1000
+            },
+            PromotionThresholds = [30, 100, 200]
+        },
+        ["FieldWorker"] = new EmployeeSalaryData
+        {
+            Rates = new Dictionary<EmployeeLevel, int>
+            {
+                [EmployeeLevel.Intern] = 90,
+                [EmployeeLevel.Junior] = 250,
+                [EmployeeLevel.Middle] = 500,
+                [EmployeeLevel.Senior] = 900
+            },
+            PromotionThresholds = [25, 80, 160]
+        },
+        ["SalesManager"] = new EmployeeSalaryData
+        {
+            Rates = new Dictionary<EmployeeLevel, int>
+            {
+                [EmployeeLevel.Intern] = 70,
+                [EmployeeLevel.Junior] = 220,
+                [EmployeeLevel.Middle] = 450,
+                [EmployeeLevel.Senior] = 800
+            },
+            PromotionThresholds = [20, 70, 150]
+        }
     };
+
+    public decimal GetRate(Employee employee)
+    {
+        var typeName = employee.GetType().Name;
+        return !LimitsByType.TryGetValue(typeName, out var data)
+            ? 0
+            : data.Rates[employee.GetLevel()];
+    }
+
+    public List<int> GetPromotionThresholds(Employee employee)
+    {
+        var typeName = employee.GetType().Name;
+        return !LimitsByType.TryGetValue(typeName, out var data) ? [] : data.PromotionThresholds;
+    }
+
+    public static decimal GetMinSalary()
+    {
+        return MinSalary;
+    }
+}
+
+public class EmployeeSalaryData
+{
+    public Dictionary<EmployeeLevel, int> Rates { get; init; } = new();
+    public List<int> PromotionThresholds { get; init; } = [];
 }

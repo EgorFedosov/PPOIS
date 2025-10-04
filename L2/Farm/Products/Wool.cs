@@ -1,13 +1,15 @@
 using Farm.Configs;
+
 namespace Farm.Products;
 
 public class Wool(ProductConfig? config = null) : Product(config ?? DefaultConfig)
 {
-    private static readonly ProductConfig DefaultConfig = new ProductConfig
+    private static readonly ProductConfig DefaultConfig = new()
     {
         DamageLevel1 = 1,
         DamageLevel2 = 2,
-        DamageLevel3 = 4
+        DamageLevel3 = 4,
+        BasePrice = 45
     };
 
     public void Card()

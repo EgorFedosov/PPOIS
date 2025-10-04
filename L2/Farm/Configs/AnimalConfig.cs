@@ -1,6 +1,5 @@
 using Farm.Places;
 using Farm.Products;
-using Farm.Configs;
 
 namespace Farm.Configs;
 
@@ -18,9 +17,9 @@ public class AnimalConfig
     private const int DefaultProductivityPenalty1 = 1;
     private const int DefaultProductivityPenalty2 = 3;
     private const int DefaultProductivityPenalty3 = 7;
+    private int _health = DefaultHealth;
 
     private int _hunger = DefaultHunger;
-    private int _health = DefaultHealth;
     private int _productivity;
 
     public int Hunger
@@ -44,7 +43,7 @@ public class AnimalConfig
     public Product? Product { get; init; }
     public Place? Place { get; set; }
     public string? Name { get; init; }
-    public int Age { get; set; }
+    public int Age { get; init; }
 
     public string? Sound { get; init; }
     public int MaxFoodIntake { get; init; } = DefaultMaxFoodIntake;
@@ -64,13 +63,13 @@ public class AnimalConfig
     public int MinHealth { get; init; }
     public int MaxHealth { get; init; }
 
-    public int LowHungerThreshold1 { get; set; } = DefaultLowHungerThreshold1;
-    public int LowHungerThreshold2 { get; set; } = DefaultLowHungerThreshold2;
-    public int LowHungerThreshold3 { get; set; } = DefaultLowHungerThreshold3;
+    public static int LowHungerThreshold1 => DefaultLowHungerThreshold1;
+    public static int LowHungerThreshold2 => DefaultLowHungerThreshold2;
+    public static int LowHungerThreshold3 => DefaultLowHungerThreshold3;
 
-    public int ProductivityPenalty1 { get; set; } = DefaultProductivityPenalty1;
-    public int ProductivityPenalty2 { get; set; } = DefaultProductivityPenalty2;
-    public int ProductivityPenalty3 { get; set; } = DefaultProductivityPenalty3;
+    public static int ProductivityPenalty1 => DefaultProductivityPenalty1;
+    public static int ProductivityPenalty2 => DefaultProductivityPenalty2;
+    public static int ProductivityPenalty3 => DefaultProductivityPenalty3;
 
     public int YoungAgeLimit { get; init; }
     public int AdultAgeLimit { get; init; }

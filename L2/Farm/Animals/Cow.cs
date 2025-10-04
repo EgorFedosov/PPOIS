@@ -5,7 +5,7 @@ namespace Farm.Animals;
 
 public class Cow(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new()
     {
         Name = "Cow",
         Sound = "Moo",
@@ -21,6 +21,7 @@ public class Cow(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         ProductivityOld = 10,
         MinHealth = 0,
         MaxHealth = 100,
+        Age = 4,
         YoungAgeLimit = 2,
         AdultAgeLimit = 5,
         OldAgeLimit = 12

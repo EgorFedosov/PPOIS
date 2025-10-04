@@ -5,14 +5,13 @@ namespace Farm.Fields;
 
 public class CabbageField(FieldConfig? config = null) : Field(config ?? DefaultConfig)
 {
-    private static readonly FieldConfig DefaultConfig = new FieldConfig
+    private static readonly FieldConfig DefaultConfig = new()
     {
         Name = "Cabbage field",
         Product = new Cabbage(),
         MinProductivity = 30,
         MaxProductivity = 250,
-        MinSoilCareLevel = 30,
-        SoilCareDecrement = 7
+        MinSoilCareLevel = 30
     };
 
     public void ApplyPesticide()

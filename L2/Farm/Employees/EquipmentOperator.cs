@@ -1,30 +1,38 @@
 using Farm.Configs;
-using Farm.Machines;
 using Farm.Fields;
+using Farm.Machines;
 using Farm.Warehouses;
 
 namespace Farm.Employees;
 
-public class EquipmentOperator(EmployeeConfig? config = null) : Employee(config ?? DefaultConfig)
+public class EquipmentOperator(Warehouse warehouse, EmployeeConfig? config = null)
+    : EmployeeWithWarehouse(config ?? DefaultConfig, warehouse)
 {
-    private static readonly EmployeeConfig DefaultConfig = new EmployeeConfig
+    private static readonly EmployeeConfig DefaultConfig = new()
     {
         Name = "Equipment Operator",
-        Age = 30,
+        Age = 30
     };
 
+    private readonly EmployeeConfig _config = config ?? DefaultConfig;
+
+    public string? Name => _config.Name;
     public Machine? CurrentMachine { get; private set; }
 
     public void SitInMachine(Machine machine)
     {
         if (machine.Driver != null)
             throw new InvalidOperationException("Машина уже занята!");
+        if (_config.Location == null)
+            throw new InvalidOperationException("Рабочее место не задано!");
+        if (machine.Location != _config.Location)
+            throw new InvalidOperationException("Машина не на том же поле!");
 
         machine.AssignDriver(this);
         CurrentMachine = machine;
     }
 
-    public void LeaveMachine()
+    private void LeaveMachine()
     {
         if (CurrentMachine == null)
             throw new InvalidOperationException("Оператор не в машине!");
@@ -33,29 +41,38 @@ public class EquipmentOperator(EmployeeConfig? config = null) : Employee(config 
         CurrentMachine = null;
     }
 
-    public override void Work(Warehouse warehouse)
+    public override void Work()
     {
-        //  TODO свои искл
-
-        if (CurrentMachine == null || config?.Location == null)
+        if (Warehouse == null)
+            throw new InvalidOperationException("Склад не установлен");
+        if (CurrentMachine == null || _config.Location == null)
             throw new InvalidOperationException("Не задана техника или поле!");
         if (CurrentMachine.Driver != this)
             throw new InvalidOperationException("Оператор не назначен водителем!");
         if (!CurrentMachine.IsOn)
             throw new InvalidOperationException("Техника выключена!");
 
-        if (config.Location is not Field field)
+        if (_config.Location is not Field field)
             throw new InvalidOperationException("Оператор может работать только на поле!");
 
-        var collected = field.CollectProduct(warehouse);
-        if (!collected && warehouse.UseSeeds(300))
-        {
-            field.Plant(300);
-        }
+        var harvested = field.CollectProduct(Warehouse);
+        if (!harvested && !field.TryPlantFromWarehouse(Warehouse))
+            Console.WriteLine("Недостаточно семян или место на поле заполнено.");
     }
 
     public override void StopWork()
     {
-        throw new NotImplementedException();
+        if (CurrentMachine != null)
+        {
+            if (CurrentMachine.IsOn)
+            {
+                CurrentMachine.TurnOff();
+                Console.WriteLine($"{_config.Name} остановил машину {CurrentMachine.Name}");
+            }
+
+            LeaveMachine();
+        }
+
+        Console.WriteLine($"{_config.Name} завершил работу и покинул поле.");
     }
 }

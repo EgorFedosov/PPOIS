@@ -9,14 +9,20 @@ public abstract class Product(ProductConfig config)
 
     public int Freshness => config.Freshness;
     public bool Processed => config.Processed;
+    public decimal Price => config.BasePrice * FreshnessFactor();
+
+    private decimal FreshnessFactor()
+    {
+        return config.Freshness / 100.0m;
+    }
 
     protected void Update()
     {
-        if (config.Damage >= config.LowDamageThreshold1)
+        if (config.Damage >= ProductConfig.LowDamageThreshold1)
             config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel1);
-        if (config.Damage >= config.LowDamageThreshold2)
+        if (config.Damage >= ProductConfig.LowDamageThreshold2)
             config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel2);
-        if (config.Damage >= config.LowDamageThreshold3)
+        if (config.Damage >= ProductConfig.LowDamageThreshold3)
             config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel3);
 
         if (config.Freshness == 0) config.Amount = 0;

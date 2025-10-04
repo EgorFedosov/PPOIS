@@ -1,13 +1,15 @@
 using Farm.Configs;
+
 namespace Farm.Products;
 
 public class CropSeed(ProductConfig? config = null) : Product(config ?? DefaultConfig)
 {
-    private static readonly ProductConfig DefaultConfig = new ProductConfig
+    private static readonly ProductConfig DefaultConfig = new()
     {
         DamageLevel1 = 1,
         DamageLevel2 = 2,
-        DamageLevel3 = 3
+        DamageLevel3 = 3,
+        BasePrice = 14
     };
 
     public void Sort()

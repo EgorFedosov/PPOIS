@@ -5,7 +5,7 @@ namespace Farm.Animals;
 
 public class Sheep(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new()
     {
         Name = "Sheep",
         Sound = "Baa",
@@ -20,6 +20,7 @@ public class Sheep(AnimalConfig? config = null) : Animal(config ?? DefaultConfig
         ProductivityOld = 5,
         MinHealth = 0,
         MaxHealth = 100,
+        Age = 5,
         YoungAgeLimit = 1,
         AdultAgeLimit = 4,
         OldAgeLimit = 10

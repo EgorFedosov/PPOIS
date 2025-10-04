@@ -5,14 +5,13 @@ namespace Farm.Fields;
 
 public class WheatField(FieldConfig? config = null) : Field(config ?? DefaultConfig)
 {
-    private static readonly FieldConfig DefaultConfig = new FieldConfig
+    private static readonly FieldConfig DefaultConfig = new()
     {
         Name = "Wheat field",
         Product = new Wheat(),
         MinProductivity = 80,
         MaxProductivity = 500,
-        MinSoilCareLevel = 15,
-        SoilCareDecrement = 4
+        MinSoilCareLevel = 15
     };
 
     public void Irrigate()

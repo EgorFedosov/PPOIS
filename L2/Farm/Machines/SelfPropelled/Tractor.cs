@@ -2,9 +2,9 @@ using Farm.Interfaces;
 
 namespace Farm.Machines.SelfPropelled;
 
-public class Tractor : Machine
+public class Tractor(string name) : Machine(name)
 {
-    private readonly List<IAttachableMachine> _attachments = new();
+    private readonly List<IAttachableMachine> _attachments = [];
     public IReadOnlyList<IAttachableMachine> Attachments => _attachments.AsReadOnly();
 
     public void Attach(IAttachableMachine machine)

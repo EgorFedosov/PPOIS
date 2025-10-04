@@ -12,7 +12,12 @@ public enum EmployeeLevel
 
 public class EmployeeConfig
 {
-    private decimal _balance = 0;
+    private const int MinAge = 18;
+    private const int MaxAge = 120;
+
+    private readonly int _age;
+    private decimal _balance;
+    private int _workCount;
 
     public decimal Balance
     {
@@ -20,14 +25,8 @@ public class EmployeeConfig
         set => _balance = value < 0 ? 0 : value;
     }
 
-    private readonly int _age;
-    private int _workCount;
 
-    private const int MinAge = 18;
-    private const int MaxAge = 120;
-
-
-    public string Name { get; init; }
+    public string? Name { get; init; }
 
     public int Age
     {
@@ -39,7 +38,6 @@ public class EmployeeConfig
 
     public Place? Location { get; set; }
 
-    public decimal Salary { get; set; }
 
     public int WorkCount
     {

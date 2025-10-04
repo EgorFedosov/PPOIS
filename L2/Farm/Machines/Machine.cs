@@ -1,17 +1,26 @@
-using Farm.Places;
 using Farm.Interfaces;
+using Farm.Places;
 
 namespace Farm.Machines;
 
-public abstract class Machine : IMachine
+public abstract class Machine(string name) : IMachine
 {
     public IWorker? Driver { get; private set; }
-    public string? Name { get; protected set; }
+    public string? Name { get; } = name;
     public Place? Location { get; private set; }
-    public bool IsOn { get; set; } = false;
+    public bool IsOn { get; private set; }
 
-    public virtual void MoveTo(Place newPlace) => Location = newPlace;
-    public virtual void AssignDriver(IWorker? driver) => Driver = driver;
+    public virtual void MoveTo(Place newPlace)
+    {
+        Location?.RemoveEntity(this);
+        Location = newPlace;
+        Location?.AddEntity(this);
+    }
+
+    public virtual void AssignDriver(IWorker? driver)
+    {
+        Driver = driver;
+    }
 
     public virtual void DriveTo(Place destination)
     {
@@ -22,6 +31,8 @@ public abstract class Machine : IMachine
         Location = destination;
     }
 
-    public virtual void TurnOn() => IsOn = true;
-    public void TurnOff() => IsOn = false;
+    public void TurnOff()
+    {
+        IsOn = false;
+    }
 }

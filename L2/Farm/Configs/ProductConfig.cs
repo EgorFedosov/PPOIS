@@ -2,8 +2,15 @@ namespace Farm.Configs;
 
 public class ProductConfig
 {
+    public const int LowDamageThreshold1 = 30;
+    public const int LowDamageThreshold2 = 60;
+    public const int LowDamageThreshold3 = 90;
     private const int DefaultMaxAmount = 100;
     private int _amount;
+
+    private int _damage;
+
+    private int _freshness = 100;
 
     public int Amount
     {
@@ -12,16 +19,13 @@ public class ProductConfig
     }
 
     public int MaxAmount { get; init; } = DefaultMaxAmount;
-
-    private int _freshness = 100;
+    public decimal BasePrice { get; init; }
 
     public int Freshness
     {
         get => _freshness;
         set => _freshness = Math.Clamp(value, 0, 100);
     }
-
-    private int _damage = 0;
 
     public int Damage
     {
@@ -32,8 +36,5 @@ public class ProductConfig
     public int DamageLevel1 { get; init; }
     public int DamageLevel2 { get; init; }
     public int DamageLevel3 { get; init; }
-    public int LowDamageThreshold1 { get; init; } = 30;
-    public int LowDamageThreshold2 { get; init; } = 60;
-    public int LowDamageThreshold3 { get; init; } = 90;
-    public bool Processed { get; set; } = false;
+    public bool Processed { get; set; }
 }

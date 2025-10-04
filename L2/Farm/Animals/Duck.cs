@@ -5,7 +5,7 @@ namespace Farm.Animals;
 
 public class Duck(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new()
     {
         Name = "Duck",
         Sound = "Quack",
@@ -21,6 +21,7 @@ public class Duck(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         ProductivityOld = 1,
         MinHealth = 0,
         MaxHealth = 100,
+        Age = 1,
         YoungAgeLimit = 1,
         AdultAgeLimit = 2,
         OldAgeLimit = 4
@@ -29,7 +30,6 @@ public class Duck(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
     public void Swim()
     {
         Console.WriteLine($"{DefaultConfig.Name} поплавала в пруду.");
-        DefaultConfig.Health += 3; 
+        DefaultConfig.Health += 3;
     }
-
 }

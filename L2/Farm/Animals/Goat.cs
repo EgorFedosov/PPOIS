@@ -5,7 +5,7 @@ namespace Farm.Animals;
 
 public class Goat(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 {
-    private static readonly AnimalConfig DefaultConfig = new AnimalConfig
+    private static readonly AnimalConfig DefaultConfig = new()
     {
         Name = "Goat",
         Sound = "Bleat",
@@ -21,6 +21,7 @@ public class Goat(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
         ProductivityOld = 3,
         MinHealth = 0,
         MaxHealth = 100,
+        Age = 7,
         YoungAgeLimit = 1,
         AdultAgeLimit = 3,
         OldAgeLimit = 8
@@ -29,7 +30,6 @@ public class Goat(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
     public void HeadButtFence()
     {
         Console.WriteLine($"{DefaultConfig.Name} боднула забор.");
-        DefaultConfig.Health -= 2; 
+        DefaultConfig.Health -= 2;
     }
-
 }

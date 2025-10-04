@@ -1,13 +1,15 @@
 using Farm.Configs;
+
 namespace Farm.Products;
 
 public class Wheat(ProductConfig? config = null) : Product(config ?? DefaultConfig)
 {
-    private static readonly ProductConfig DefaultConfig = new ProductConfig
+    private static readonly ProductConfig DefaultConfig = new()
     {
         DamageLevel1 = 1,
         DamageLevel2 = 3,
-        DamageLevel3 = 6
+        DamageLevel3 = 6,
+        BasePrice = 26
     };
 
     public void Clean()

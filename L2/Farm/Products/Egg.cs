@@ -1,13 +1,15 @@
 using Farm.Configs;
+
 namespace Farm.Products;
 
 public class Egg(ProductConfig? config = null) : Product(config ?? DefaultConfig)
 {
-    private static readonly ProductConfig DefaultConfig = new ProductConfig
+    private static readonly ProductConfig DefaultConfig = new()
     {
         DamageLevel1 = 2,
         DamageLevel2 = 5,
-        DamageLevel3 = 10
+        DamageLevel3 = 10,
+        BasePrice = 5
     };
 
     public void CheckForCracks()
