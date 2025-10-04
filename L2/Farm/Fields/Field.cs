@@ -1,6 +1,7 @@
+using Farm.Configs;
 using Farm.Places;
 using Farm.Products;
-using Farm.Interface;
+using Farm.Warehouses;
 
 namespace Farm.Fields;
 
@@ -14,6 +15,14 @@ public abstract class Field(FieldConfig config) : Place
         config.Product?.Produce(config.Productivity);
     }
 
+    public bool CollectProduct(Warehouse warehouse)
+    { //TODO как то обработать
+        if (config.Product == null || config.Product.Amount == 0)
+            return false;
+        config.Product.Collect(warehouse);
+        return true;
+    }
+
     public void Plant(int seeds)
     {
         //TODO добавить кастомное исключение 
@@ -22,10 +31,10 @@ public abstract class Field(FieldConfig config) : Place
         config.SeedCount = seeds;
     }
 
-    public void Care(IWorker worker)
+    public void Care(int carePower)
     {
         config.SoilCareLevel = Math.Clamp(
-            config.SoilCareLevel + worker.CarePower,
+            config.SoilCareLevel + carePower,
             config.MinSoilCareLevel,
             config.MaxSoilCareLevel
         );

@@ -1,3 +1,4 @@
+using Farm.Configs;
 namespace Farm.Products;
 
 public class CropSeed(ProductConfig? config = null) : Product(config ?? DefaultConfig)

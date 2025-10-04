@@ -1,6 +1,8 @@
-using Farm.Interface;
+using Farm.Configs;
+using Farm.Interfaces;
 using Farm.Places;
 using Farm.Products;
+using Farm.Configs;
 
 namespace Farm.Animals;
 

@@ -1,5 +1,6 @@
+using Farm.Configs;
 using Farm.Products;
-
+using Farm.Configs;
 namespace Farm.Fields;
 
 public class PotatoField(FieldConfig? config = null) : Field(config ?? DefaultConfig)

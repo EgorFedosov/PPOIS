@@ -1,3 +1,4 @@
+using Farm.Configs;
 using Farm.Products;
 
 namespace Farm.Animals;

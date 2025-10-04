@@ -1,3 +1,6 @@
+using Farm.Configs;
+using Farm.Warehouses;
+
 namespace Farm.Products;
 
 public abstract class Product(ProductConfig config)
@@ -26,10 +29,12 @@ public abstract class Product(ProductConfig config)
             config.Amount = Math.Clamp(config.Amount + productivity, 0, config.MaxAmount);
     }
 
-    public void Collect()
+    public void Collect(Warehouse warehouse)
     {
-        config.Amount = 0;
         config.Freshness = 100;
+        warehouse.Store(this);
+
+        config.Amount = 0;
         config.Processed = false;
     }
 }

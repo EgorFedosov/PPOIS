@@ -1,3 +1,4 @@
+using Farm.Configs;
 namespace Farm.Products;
 
 public class Meat(ProductConfig? config = null) : Product(config ?? DefaultConfig)

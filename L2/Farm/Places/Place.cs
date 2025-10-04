@@ -1,4 +1,4 @@
-using Farm.Interface;
+using Farm.Interfaces;
 
 namespace Farm.Places;
 

@@ -1,8 +1,9 @@
+using Farm.Configs;
 namespace Farm.Products;
 
 public class FieldFertilizer(ProductConfig? config = null) : Product(config ?? DefaultConfig)
 {
-    // получаем при уборке полей
+    // получаем при уборке place от animal
     private static readonly ProductConfig DefaultConfig = new ProductConfig
     {
         DamageLevel1 = 1,

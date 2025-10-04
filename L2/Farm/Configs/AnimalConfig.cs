@@ -1,7 +1,8 @@
 using Farm.Places;
 using Farm.Products;
+using Farm.Configs;
 
-namespace Farm.Animals;
+namespace Farm.Configs;
 
 public class AnimalConfig
 {

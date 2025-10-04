@@ -1,6 +1,5 @@
-namespace Farm.Interface;
+namespace Farm.Interfaces;
 
 public interface IWorker
 {
-    int CarePower { get; }    
 }

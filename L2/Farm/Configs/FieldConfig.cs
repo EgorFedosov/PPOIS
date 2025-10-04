@@ -1,7 +1,7 @@
 using Farm.Products;
-using Farm.Interface;
+using Farm.Interfaces;
 
-namespace Farm.Fields;
+namespace Farm.Configs;
 
 public class FieldConfig
 {

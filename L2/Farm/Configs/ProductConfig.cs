@@ -1,4 +1,4 @@
-namespace Farm.Products;
+namespace Farm.Configs;
 
 public class ProductConfig
 {
