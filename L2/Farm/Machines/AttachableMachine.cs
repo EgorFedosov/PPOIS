@@ -8,13 +8,10 @@ public abstract class AttachableMachine(string name) : Machine(name), IAttachabl
     private Tractor? Tractor { get; set; }
     private bool IsAttached => Tractor != null;
 
-    public void SetTractor(Tractor? tractor)
-    {
+    public void SetTractor(Tractor? tractor) =>
         Tractor = tractor;
-    }
+
 
     public string GetStatus()
-    {
-        return IsAttached ? $"Подключён к трактору {Tractor?.Name}" : "Не подключён";
-    }
+        => IsAttached ? $"Подключён к трактору {Tractor?.Name}" : "Не подключён";
 }

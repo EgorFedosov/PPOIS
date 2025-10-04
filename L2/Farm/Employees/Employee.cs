@@ -6,30 +6,15 @@ namespace Farm.Employees;
 
 public abstract class Employee(EmployeeConfig config) : IWorker
 {
-    public int GetWorkCount()
-    {
-        return config.WorkCount;
-    }
+    public int GetWorkCount() => config.WorkCount;
 
-    public string? GetName()
-    {
-        return config.Name;
-    }
+    public string? GetName() => config.Name;
 
-    public void ResetWorkCount()
-    {
-        config.WorkCount = 0;
-    }
+    public void ResetWorkCount() => config.WorkCount = 0;
 
-    public EmployeeLevel GetLevel()
-    {
-        return config.Level;
-    }
+    public EmployeeLevel GetLevel() => config.Level;
 
-    public void SetLevel(EmployeeLevel level)
-    {
-        config.Level = level;
-    }
+    public void SetLevel(EmployeeLevel level) => config.Level = level;
 
     public abstract void Work();
     public abstract void StopWork();
@@ -42,8 +27,5 @@ public abstract class Employee(EmployeeConfig config) : IWorker
         config.Location = newPlace;
     }
 
-    public void ReceiveSalary(decimal amount)
-    {
-        config.Balance += amount < 0 ? 0 : amount;
-    }
+    public void ReceiveSalary(decimal amount) => config.Balance += amount < 0 ? 0 : amount;
 }
