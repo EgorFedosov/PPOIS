@@ -3,6 +3,7 @@ using Farm.Fields;
 using Farm.Machines.Attachable;
 using Farm.Machines.SelfPropelled;
 using Farm.Warehouses;
+using Farm.Exceptions;
 
 namespace Farm.Employees;
 
@@ -23,14 +24,10 @@ public class FieldWorker(Warehouse warehouse, EmployeeConfig? config = null)
     public override void Work()
     {
         if (_config.Location is not Field field)
-            throw new InvalidOperationException("Работник должен находиться на поле!");
+            throw new FieldWorkerNotOnFieldException("Работник не на поле");
 
         if (PartnerOperator != null)
         {
-            if (CurrentTractor == null)
-                throw new InvalidOperationException("У оператора нет техники!");
-
-            Console.WriteLine($"{_config.Name} работает на тракторе {CurrentTractor.Name}.");
             AssistOperator();
         }
         else
@@ -45,7 +42,7 @@ public class FieldWorker(Warehouse warehouse, EmployeeConfig? config = null)
     public void ConnectToOperator(EquipmentOperator operatorWorker)
     {
         PartnerOperator = operatorWorker;
-        Console.WriteLine($"🔗 {_config.Name} теперь работает в паре с {operatorWorker.Name ?? "оператором"}.");
+        Console.WriteLine($"{_config.Name} теперь работает в паре с {operatorWorker.Name ?? "оператором"}.");
     }
 
     private void DisconnectOperator()
@@ -59,6 +56,7 @@ public class FieldWorker(Warehouse warehouse, EmployeeConfig? config = null)
         if (CurrentTractor == null) return;
 
         foreach (var attachment in CurrentTractor.Attachments)
+        {
             switch (attachment)
             {
                 case Plow plow:
@@ -71,9 +69,9 @@ public class FieldWorker(Warehouse warehouse, EmployeeConfig? config = null)
                     sprayer.SprayField();
                     break;
                 default:
-                    Console.WriteLine("Неизвестное навесное оборудование.");
-                    break;
+                    throw new UnknownAttachmentException("Неизвестное навесное оборудование");
             }
+        }
     }
 
     private void ManualWork(Field field)

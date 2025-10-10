@@ -12,18 +12,24 @@ public class Potato(ProductConfig? config = null) : Product(config ?? DefaultCon
         BasePrice = 4
     };
 
-    public void Brush()
+    private void Brush()
     {
         Console.WriteLine("Картофель очищен от земли.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 3);
     }
 
-    public void StoreCool()
+    private void StoreCool()
     {
         Console.WriteLine("Картофель помещен в прохладное хранилище.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 7);
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 1);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        Brush();
+        StoreCool();
     }
 }

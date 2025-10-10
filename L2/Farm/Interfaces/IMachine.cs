@@ -52,5 +52,9 @@ namespace Farm.Interfaces
         ///     Выключает машину.
         /// </summary>
         void TurnOff();
+        /// <summary>
+        ///     Включает машину.
+        /// </summary>
+        void TurnOn();
     }
 }

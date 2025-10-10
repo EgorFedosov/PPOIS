@@ -1,13 +1,12 @@
 using Farm.Configs;
 using Farm.Places;
 using Farm.Warehouses;
+using Farm.Exceptions;
 
 namespace Farm.Fields;
 
-public abstract class Field(FieldConfig config) : Place
+public abstract class Field(FieldConfig config) : Place(config.Name)
 {
-    public string? Name => config.Name;
-
     public void Update()
     {
         config.Productivity = (int)Math.Round(CalculateProductivity());
@@ -19,7 +18,7 @@ public abstract class Field(FieldConfig config) : Place
         if (config.Product == null || config.Product.Amount == 0)
             return false;
 
-        config.Product.Collect(warehouse);
+        warehouse.Store(config.Product);
         return true;
     }
 
@@ -29,7 +28,7 @@ public abstract class Field(FieldConfig config) : Place
             return;
 
         if (config.SeedCount + count > FieldConfig.MaxSeedCount)
-            throw new InvalidOperationException("Превышен лимит посева на поле!");
+            throw new FieldSeedLimitExceededException("Превышен лимит посева на поле!");
 
         config.SeedCount += count;
         Console.WriteLine($"Посеяно {count} семян. Всего: {config.SeedCount}/{FieldConfig.MaxSeedCount}");

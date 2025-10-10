@@ -12,17 +12,23 @@ public class CropSeed(ProductConfig? config = null) : Product(config ?? DefaultC
         BasePrice = 14
     };
 
-    public void Sort()
+    private void Sort()
     {
         Console.WriteLine("Семена отсортированы по качеству.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 2);
     }
 
-    public void Dry()
+    private void Dry()
     {
         Console.WriteLine("Семена подсушены.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 1);
+    }
+    
+    public override void HandleAfterCollection()
+    {
+        Sort();
+        Dry();
     }
 }

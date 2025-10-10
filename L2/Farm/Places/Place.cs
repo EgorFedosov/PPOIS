@@ -4,6 +4,13 @@ namespace Farm.Places;
 
 public abstract class Place
 {
+    protected Place(string? name)
+    {
+        Name = name;
+        Console.WriteLine($"{name} создан(о)");
+    }
+
+    public readonly string? Name;
     private readonly List<IAnimal> _animals = [];
     private readonly List<IMachine> _machines = [];
     private readonly List<IWorker> _workers = [];

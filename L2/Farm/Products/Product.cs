@@ -6,9 +6,7 @@ namespace Farm.Products;
 public abstract class Product(ProductConfig config)
 {
     public int Amount => config.Amount;
-
     public int Freshness => config.Freshness;
-    public bool Processed => config.Processed;
     public decimal Price => config.BasePrice * FreshnessFactor();
 
     private decimal FreshnessFactor()
@@ -35,12 +33,22 @@ public abstract class Product(ProductConfig config)
             config.Amount = Math.Clamp(config.Amount + productivity, 0, config.MaxAmount);
     }
 
-    public void Collect(Warehouse warehouse)
+    public virtual void HandleAfterCollection()
     {
-        config.Freshness = 100;
-        warehouse.Store(this);
+    }
 
-        config.Amount = 0;
-        config.Processed = false;
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public override int GetHashCode()
+    {
+        return GetType().GetHashCode();
     }
 }

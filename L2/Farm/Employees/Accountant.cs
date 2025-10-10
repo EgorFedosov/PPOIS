@@ -1,8 +1,8 @@
 using Farm.Configs;
-
+using Farm.Interfaces;
 namespace Farm.Employees;
 
-public class Accountant(IEnumerable<Employee> employees, EmployeeConfig? config = null)
+public class Accountant(IEnumerable<IWorker> employees, EmployeeConfig? config = null)
     : Employee(config ?? DefaultConfig)
 {
     private static readonly EmployeeConfig DefaultConfig = new()
@@ -23,7 +23,7 @@ public class Accountant(IEnumerable<Employee> employees, EmployeeConfig? config 
         PayEmployee(this);
     }
 
-    private void PayEmployee(Employee employee)
+    private void PayEmployee(IWorker employee)
     {
         var rate = _salaryConfig.GetRate(employee);
         var salary = rate * employee.GetWorkCount();
@@ -37,7 +37,7 @@ public class Accountant(IEnumerable<Employee> employees, EmployeeConfig? config 
         Console.WriteLine($"Начислено {salary} {employee.GetName()} ({employee.GetType().Name})");
     }
 
-    private void PromoteIfNeeded(Employee employee)
+    private void PromoteIfNeeded(IWorker employee)
     {
         var thresholds = _salaryConfig.GetPromotionThresholds(employee);
         var currentLevel = employee.GetLevel();

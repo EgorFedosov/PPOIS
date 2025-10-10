@@ -1,43 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Farm.Places;
 using Farm.Products;
 
 namespace Farm.Warehouses;
 
-public class Warehouse
+public class Warehouse : Place
 {
+    private static readonly CropSeed SeedKey = new();
     private readonly Dictionary<Product, uint> _products = new();
+
+    public Warehouse(string? name) : base(name)
+    {
+        _products[SeedKey] = 10000;
+    }
 
     public void Store(Product product)
     {
+        product.HandleAfterCollection();
+        _products.TryAdd(product, 0);
         _products[product] += (uint)product.Amount;
 
-        var seed = new CropSeed();
-        _products.TryAdd(seed, 0);
-        _products[seed] += (uint)Math.Floor(product.Amount * 0.1);
+        _products.TryAdd(SeedKey, 0);
+        _products[SeedKey] += (uint)Math.Floor(product.Amount * 0.1);
     }
 
     public uint TakeSeeds(uint requestedCount)
     {
-        var seed = new CropSeed();
-        if (!_products.TryGetValue(seed, out var available) || available == 0)
+        if (!_products.TryGetValue(SeedKey, out var available) || available == 0)
             return 0;
 
         var taken = Math.Min(requestedCount, available);
-        _products[seed] = available - taken;
+        _products[SeedKey] = available - taken;
         return taken;
     }
 
     public IEnumerable<Product> GetAvailableProductsForSale()
     {
-        return _products.Keys
-            .Where(p => _products[p] > 0 && p is not CropSeed);
+        return _products
+            .Where(kv => kv.Value > 0 && kv.Key.GetType() != typeof(CropSeed))
+            .Select(kv => kv.Key);
     }
-
 
     public bool TakeProduct(Product product, uint count)
     {
         if (!_products.TryGetValue(product, out var available) || available < count)
+        {
             return false;
-
+        }
+        
         _products[product] = available - count;
         return true;
     }

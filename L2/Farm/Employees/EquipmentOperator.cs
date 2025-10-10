@@ -1,7 +1,8 @@
 using Farm.Configs;
 using Farm.Fields;
-using Farm.Machines;
+using Farm.Exceptions;
 using Farm.Warehouses;
+using Farm.Interfaces;
 
 namespace Farm.Employees;
 
@@ -17,17 +18,17 @@ public class EquipmentOperator(Warehouse warehouse, EmployeeConfig? config = nul
     private readonly EmployeeConfig _config = config ?? DefaultConfig;
 
     public string? Name => _config.Name;
-    public Machine? CurrentMachine { get; private set; }
+    public IMachine? CurrentMachine { get; private set; }
 
-    public void SitInMachine(Machine machine)
+    public void SitInMachine(IMachine machine)
     {
         if (machine.Driver != null)
-            throw new InvalidOperationException("Машина уже занята!");
+            throw new MachineAlreadyOccupiedException("Техника занята");
         if (_config.Location == null)
-            throw new InvalidOperationException("Рабочее место не задано!");
+            throw new InvalidEmployeeLocationException("Рабочее место не задано");
         if (machine.Location != _config.Location)
-            throw new InvalidOperationException("Машина не на том же поле!");
-
+            throw new MachineLocationMismatchException("Машина и работник находятся в разных местах");
+        Console.WriteLine($"{_config.Name} сел в {machine.Name}");
         machine.AssignDriver(this);
         CurrentMachine = machine;
     }
@@ -35,7 +36,7 @@ public class EquipmentOperator(Warehouse warehouse, EmployeeConfig? config = nul
     private void LeaveMachine()
     {
         if (CurrentMachine == null)
-            throw new InvalidOperationException("Оператор не в машине!");
+            throw new DriverNotAssignedException("Водитель не назначен");
 
         CurrentMachine.AssignDriver(null);
         CurrentMachine = null;
@@ -44,20 +45,20 @@ public class EquipmentOperator(Warehouse warehouse, EmployeeConfig? config = nul
     public override void Work()
     {
         if (Warehouse == null)
-            throw new InvalidOperationException("Склад не установлен");
+            throw new WarehouseNotAssignedException("Склад не установлен");
         if (CurrentMachine == null || _config.Location == null)
-            throw new InvalidOperationException("Не задана техника или поле!");
+            throw new EquipmentOrFieldNotAssignedException("Не задана техника или поле");
         if (CurrentMachine.Driver != this)
-            throw new InvalidOperationException("Оператор не назначен водителем!");
+            throw new DriverNotAssignedException("Водитель не назначен");
         if (!CurrentMachine.IsOn)
-            throw new InvalidOperationException("Техника выключена!");
+            throw new MachineNotOnException("Техника выключена");
 
         if (_config.Location is not Field field)
-            throw new InvalidOperationException("Оператор может работать только на поле!");
+            throw new InvalidWorkLocationException("Оператор может работать только на поле");
 
         var harvested = field.CollectProduct(Warehouse);
         if (!harvested && !field.TryPlantFromWarehouse(Warehouse))
-            Console.WriteLine("Недостаточно семян или место на поле заполнено.");
+            throw new InsufficientSeedsException("Недостаточно семян или поле заполнено");
     }
 
     public override void StopWork()

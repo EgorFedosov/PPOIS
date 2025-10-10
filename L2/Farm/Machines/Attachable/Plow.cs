@@ -3,7 +3,7 @@ using Farm.Machines.SelfPropelled;
 
 namespace Farm.Machines.Attachable;
 
-public class Plow(string name) : Machine(name), IAttachableMachine
+public class Plow(string? name) : Machine(name ?? "Plow"), IAttachableMachine
 {
     private Tractor? _tractor;
 

@@ -12,7 +12,7 @@ public class Milk(ProductConfig? config = null) : Product(config ?? DefaultConfi
         BasePrice = 9
     };
 
-    public void Pasteurize()
+    private void Pasteurize()
     {
         Console.WriteLine("Молоко пастеризовано.");
         var effectiveConfig = config ?? DefaultConfig;
@@ -20,10 +20,15 @@ public class Milk(ProductConfig? config = null) : Product(config ?? DefaultConfi
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 2);
     }
 
-    public void Chill()
+    private void Chill()
     {
         Console.WriteLine("Молоко охлаждено для хранения.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 5);
+    }
+    public override void HandleAfterCollection()
+    {
+        Pasteurize();
+        Chill();
     }
 }

@@ -12,18 +12,24 @@ public class Fruit(ProductConfig? config = null) : Product(config ?? DefaultConf
         BasePrice = 11
     };
 
-    public void Wash()
+    private void Wash()
     {
         Console.WriteLine("Фрукты промыты.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 8);
     }
 
-    public void Ripen()
+    private void Ripen()
     {
         Console.WriteLine("Фрукты дозревают на складе.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 5);
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage + 2);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        Wash();
+        Ripen();
     }
 }

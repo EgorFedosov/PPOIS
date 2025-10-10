@@ -12,17 +12,23 @@ public class Wool(ProductConfig? config = null) : Product(config ?? DefaultConfi
         BasePrice = 45
     };
 
-    public void Card()
+    private void Card()
     {
         Console.WriteLine("Шерсть вычесана.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 6);
     }
 
-    public void Wash()
+    private void Wash()
     {
         Console.WriteLine("Шерсть промыта.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 2);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        Card();
+        Wash();
     }
 }

@@ -35,6 +35,6 @@ public class FieldConfig
     public int MinSoilCareLevel { get; init; }
 
 
-    public string? Name { get; init; }
+    public string Name { get; init; } = "DefaultName";
     public Product? Product { get; init; }
 }

@@ -31,7 +31,9 @@ public interface IAnimal
     ///     Если место совпадает с текущим или <see langword="null" />, перемещение не происходит.
     /// </summary>
     /// <param name="newPlace">Новое место, куда следует переместить животное.</param>
-    void MoveTo(Place? newPlace);
+    void MoveTo(Place newPlace);
 
     void Die();
+    void Update();
+    void Eat(int amount);
 }

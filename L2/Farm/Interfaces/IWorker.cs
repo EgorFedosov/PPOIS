@@ -53,7 +53,7 @@ namespace Farm.Interfaces
         ///     Если место совпадает с текущим или <see langword="null"/>, перемещение не выполняется.
         /// </summary>
         /// <param name="newPlace">Новое место для перемещения.</param>
-        void MoveTo(Place? newPlace);
+        void MoveTo(Place newPlace);
 
         /// <summary>
         ///     Начисляет указанную сумму зарплаты работнику.

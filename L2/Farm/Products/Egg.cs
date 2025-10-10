@@ -12,7 +12,7 @@ public class Egg(ProductConfig? config = null) : Product(config ?? DefaultConfig
         BasePrice = 5
     };
 
-    public void CheckForCracks()
+    private void CheckForCracks()
     {
         Console.WriteLine("Яйца проверены на трещины.");
         var effectiveConfig = config ?? DefaultConfig;
@@ -20,10 +20,16 @@ public class Egg(ProductConfig? config = null) : Product(config ?? DefaultConfig
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 1);
     }
 
-    public void ChillEggs()
+    private void ChillEggs()
     {
         Console.WriteLine("Яйца охлаждены.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 5);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        CheckForCracks();
+        ChillEggs();
     }
 }

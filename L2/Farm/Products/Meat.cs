@@ -12,17 +12,23 @@ public class Meat(ProductConfig? config = null) : Product(config ?? DefaultConfi
         BasePrice = 17
     };
 
-    public void Chill()
+    private void Chill()
     {
         Console.WriteLine("Мясо охлаждено для хранения.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 8);
     }
 
-    public void VacuumPack()
+    private void VacuumPack()
     {
         Console.WriteLine("Мясо упаковано в вакуум.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Damage = Math.Max(0, effectiveConfig.Damage - 5);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        Chill();
+        VacuumPack();
     }
 }

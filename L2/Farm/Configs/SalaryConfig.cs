@@ -1,4 +1,5 @@
 using Farm.Employees;
+using Farm.Interfaces;
 
 namespace Farm.Configs;
 
@@ -65,7 +66,7 @@ public class SalaryConfig
         }
     };
 
-    public decimal GetRate(Employee employee)
+    public decimal GetRate(IWorker employee)
     {
         var typeName = employee.GetType().Name;
         return !LimitsByType.TryGetValue(typeName, out var data)
@@ -73,7 +74,7 @@ public class SalaryConfig
             : data.Rates[employee.GetLevel()];
     }
 
-    public List<int> GetPromotionThresholds(Employee employee)
+    public List<int> GetPromotionThresholds(IWorker employee)
     {
         var typeName = employee.GetType().Name;
         return !LimitsByType.TryGetValue(typeName, out var data) ? [] : data.PromotionThresholds;

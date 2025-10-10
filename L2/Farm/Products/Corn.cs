@@ -12,18 +12,24 @@ public class Corn(ProductConfig? config = null) : Product(config ?? DefaultConfi
         BasePrice = 12
     };
 
-    public void Husk()
+    private void Husk()
     {
         Console.WriteLine("Кукуруза очищена от листьев.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 5);
     }
 
-    public void Roast()
+    private void Roast()
     {
         Console.WriteLine("Часть кукурузы слегка обжарена.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Max(0, effectiveConfig.Freshness - 3);
         effectiveConfig.Damage = Math.Min(100, effectiveConfig.Damage + 5);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        Husk();
+        Roast();
     }
 }

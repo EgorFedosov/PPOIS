@@ -26,7 +26,6 @@ public class Chicken(AnimalConfig? config = null) : Animal(config ?? DefaultConf
         AdultAgeLimit = 2,
         OldAgeLimit = 5
     };
-
     public void DigForWorms()
     {
         Console.WriteLine($"{DefaultConfig.Name} копается в земле и ищет червяков!");

@@ -2,6 +2,7 @@ using Farm.Animals;
 using Farm.Configs;
 using Farm.Interfaces;
 using Farm.Warehouses;
+using Farm.Exceptions;
 
 namespace Farm.Employees;
 
@@ -20,14 +21,11 @@ public class Farmer(Warehouse warehouse, EmployeeConfig? config = null)
     public override void Work()
     {
         if (_config.Location == null)
-            throw new InvalidOperationException("Фермер не находится на месте!");
+            throw new FarmerLocationNotAssignedException("Фермер не на месте");
 
         var animals = _config.Location.GetAnimals().ToList();
         if (animals.Count == 0)
-        {
-            Console.WriteLine("На этой локации нет животных для работы.");
-            return;
-        }
+            throw new NoAnimalsOnLocationException("Нет животных для работы");
 
         foreach (var animal in animals) CollectFromAnimal(animal);
 
@@ -38,23 +36,19 @@ public class Farmer(Warehouse warehouse, EmployeeConfig? config = null)
     {
         var product = animal.Product;
         if (product == null)
-        {
-            Console.WriteLine($"{animal.GetType().Name} не производит продукт сейчас.");
-            return;
-        }
-
+            throw new AnimalHasNoProductException($"{animal.GetType().Name} не производит продукт");
         ReactToFarmerLevel(animal);
 
         if (animal is Pig or Rabbit)
         {
-            Console.WriteLine($"💀 {animal.GetType().Name} был забит на мясо...");
+            Console.WriteLine($"{animal.GetType().Name} был забит на мясо...");
             Warehouse.Store(product);
             animal.Die();
             return;
         }
 
-        product.Collect(Warehouse);
-        Console.WriteLine($" {_config.Name} собрал {product.GetType().Name} у {animal.GetType().Name}.");
+        Warehouse.Store(product);
+        Console.WriteLine($"{_config.Name} собрал {product.GetType().Name} у {animal.GetType().Name}.");
     }
 
     private void ReactToFarmerLevel(IAnimal animal)

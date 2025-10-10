@@ -45,8 +45,7 @@ public class SalesManager(Warehouse warehouse, EmployeeConfig? config = null)
     }
 
 
-    public override void StopWork()
-    {
+    public override void StopWork() =>
         Console.WriteLine($"{_config.Name} завершил работу. Всего заработано: {_moneyEarned} денег.");
-    }
+    
 }

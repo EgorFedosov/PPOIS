@@ -12,10 +12,15 @@ public class Cabbage(ProductConfig? config = null) : Product(config ?? DefaultCo
         BasePrice = 10
     };
 
-    public void PrepareForStorage()
+    private void PrepareForStorage()
     {
         Console.WriteLine("Капуста подготовлена к хранению.");
         var effectiveConfig = config ?? DefaultConfig;
         effectiveConfig.Freshness = Math.Min(100, effectiveConfig.Freshness + 10);
+    }
+
+    public override void HandleAfterCollection()
+    {
+        PrepareForStorage();
     }
 }
