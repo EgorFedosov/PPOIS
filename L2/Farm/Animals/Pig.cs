@@ -1,5 +1,6 @@
 using Farm.Configs;
 using Farm.Products;
+using Farm.Exceptions;
 
 namespace Farm.Animals;
 
@@ -29,6 +30,9 @@ public class Pig(AnimalConfig? config = null) : Animal(config ?? DefaultConfig)
 
     public void RollInMud()
     {
+        if (CurrentPlace == null)
+            throw new AnimalInvalidPlaceStateException("Место не инициализировано");
+        
         Console.WriteLine($"{DefaultConfig.Name} роется в грязи — счастье +10 :)");
         DefaultConfig.Health += 5;
         GoToToilet();
