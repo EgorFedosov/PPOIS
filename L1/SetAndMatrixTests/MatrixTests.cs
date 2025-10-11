@@ -445,7 +445,7 @@ public class MatrixTests
         };
         Assert.False(matrix.IsZero());
     }
-
+    
     [Fact]
     public void IsIdentity_IdentityMatrix_ReturnsTrue()
     {
@@ -457,7 +457,7 @@ public class MatrixTests
         };
         Assert.True(matrix.IsIdentity());
     }
-
+    
     [Fact]
     public void IsIdentity_NonIdentityMatrix_ReturnsFalse()
     {
@@ -470,7 +470,7 @@ public class MatrixTests
         };
         Assert.False(matrix.IsIdentity());
     }
-
+    
     [Fact]
     public void IsSymmetric_SymmetricMatrix_ReturnsTrue()
     {
@@ -482,7 +482,7 @@ public class MatrixTests
         };
         Assert.True(matrix.IsSymmetric());
     }
-
+    
     [Fact]
     public void IsSymmetric_NonSymmetricMatrix_ReturnsFalse()
     {
@@ -495,7 +495,7 @@ public class MatrixTests
         };
         Assert.False(matrix.IsSymmetric());
     }
-
+    
     [Fact]
     public void IsUpperTriangular_UpperTriangularMatrix_ReturnsTrue()
     {
@@ -507,7 +507,7 @@ public class MatrixTests
         };
         Assert.True(matrix.IsUpperTriangular());
     }
-
+    
     [Fact]
     public void IsUpperTriangular_NonUpperTriangular_ReturnsFalse()
     {
@@ -520,7 +520,7 @@ public class MatrixTests
         };
         Assert.False(matrix.IsUpperTriangular());
     }
-
+    
     [Fact]
     public void IsLowerTriangular_LowerTriangularMatrix_ReturnsTrue()
     {
@@ -532,7 +532,7 @@ public class MatrixTests
         };
         Assert.True(matrix.IsLowerTriangular());
     }
-
+    
     [Fact]
     public void Equals_SameMatrix_ReturnsTrue()
     {
@@ -541,7 +541,7 @@ public class MatrixTests
         
         Assert.True(matrix1.Equals(matrix2));
     }
-
+    
     [Fact]
     public void Equals_DifferentMatrix_ReturnsFalse()
     {
@@ -550,7 +550,7 @@ public class MatrixTests
         
         Assert.False(matrix1.Equals(matrix2));
     }
-
+    
     [Fact]
     public void Equals_NonMatrixObject_ReturnsFalse()
     {
@@ -559,7 +559,7 @@ public class MatrixTests
         
         Assert.False(matrix.Equals(otherObject));
     }
-
+    
     [Fact]
     public void GetHashCode_EqualMatrices_HaveSameHashCode()
     {
@@ -568,7 +568,7 @@ public class MatrixTests
         
         Assert.Equal(matrix1.GetHashCode(), matrix2.GetHashCode());
     }
-
+    
     [Fact]
     public void ToString_ReturnsCorrectFormat()
     {
@@ -586,7 +586,7 @@ public class MatrixTests
         Assert.Contains("3,7", result);
         Assert.Contains("4,1", result);
     }
-
+    
     [Fact]
     public void OperatorNotEqual_ReturnsCorrectValue()
     {
@@ -595,14 +595,14 @@ public class MatrixTests
         
         Assert.True(matrix1 != matrix2);
     }
-
+    
     [Fact]
     public void ValidateFile_EmptyPath_Throws()
     {
         var matrix = new Matrix(1, 1);
         Assert.Throws<ArgumentException>(() => matrix.LoadFromFile(""));
     }
-
+    
     [Fact]
     public void ValidateFile_NullPath_Throws()
     {

@@ -42,10 +42,10 @@ public class AnimalConfig
 
     public Product? Product { get; init; }
     public Place? Place { get; set; }
-    public string? Name { get; init; }
+    public string Name { get; init; } = "DefaultName";
     public int Age { get; init; }
 
-    public string? Sound { get; init; }
+    public string Sound { get; init; } = "DefaultSound";
     public int MaxFoodIntake { get; init; } = DefaultMaxFoodIntake;
     public float DirtinessPerToilet { get; init; }
 

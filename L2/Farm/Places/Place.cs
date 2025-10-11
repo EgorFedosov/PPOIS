@@ -14,7 +14,7 @@ public abstract class Place
     private readonly List<IAnimal> _animals = [];
     private readonly List<IMachine> _machines = [];
     private readonly List<IWorker> _workers = [];
-    private float Dirtiness { get; set; }
+    public float Dirtiness { get; private set; }
 
     public void AddEntity(IAnimal animal) => _animals.Add(animal);
     public void RemoveEntity(IAnimal animal) => _animals.Remove(animal);

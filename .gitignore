@@ -1,19 +1,9 @@
-*.user
-*.suo
-*.DotSettings.user
-.idea/
+**/*.user
+**/*.suo
 
-
-L1/SetAndMatrix/bin/
-L1/SetAndMatrix/obj/
-L1/SetAndMatrix/task.txt
-
-L1/SetAndMatrixTests/bin/
-L1/SetAndMatrixTests/obj/
-L1/SetAndMatrixTests/coverage.json
-
-L2/.id
-L2/Farm/bin/
-L2/Farm/obj/
-L2/Farm/task.txt
-L2/Farm/TODO.txt
+**/.idea/
+**/bin/
+**/obj/
+**/*.txt
+**/*.json
+**/.id

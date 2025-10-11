@@ -9,7 +9,15 @@ namespace Farm.Animals;
 public abstract class Animal : IAnimal
 {
     private readonly AnimalConfig _config;
-    private Place? _place;
+    public string Sound => _config.Sound;
+    public string Name => _config.Name;
+    public int Age => _config.Age;
+    public int Health => _config.Health;
+    public int Hunger => _config.Hunger;
+    public int Productivity => _config.Productivity;
+    public float DirtinessPerToilet => _config.DirtinessPerToilet;
+    protected Place? CurrentPlace { get; private set; }
+
 
     protected Animal(AnimalConfig config)
     {
@@ -24,15 +32,15 @@ public abstract class Animal : IAnimal
 
     private Place? Place
     {
-        get => _place;
+        get => CurrentPlace;
         set
         {
-            if (_place == value) return;
+            if (CurrentPlace == value) return;
 
-            _place?.RemoveEntity(this);
-            _place = value;
+            CurrentPlace?.RemoveEntity(this);
             _config.Place = value;
-            _place?.AddEntity(this);
+            CurrentPlace = value;
+            CurrentPlace?.AddEntity(this);
         }
     }
 
@@ -52,7 +60,7 @@ public abstract class Animal : IAnimal
     public void Die()
     {
         if (_config.Health <= 0) throw new AnimalAlreadyDeadException($"{_config.Name} уже мертво");
-        
+
         Console.WriteLine($"{_config.Name} умер(ла).");
         Place = null;
         _config.Health = 0;
@@ -62,7 +70,7 @@ public abstract class Animal : IAnimal
     {
         if (Place == newPlace)
             throw new InvalidMoveException($"{_config.Name} уже находится на {newPlace.Name}");
-        
+
         Place = newPlace;
     }
 
@@ -70,9 +78,12 @@ public abstract class Animal : IAnimal
     {
         _config.Hunger -= 1;
 
-        if (_config.Hunger <= AnimalConfig.LowHungerThreshold1) _config.Productivity -= AnimalConfig.ProductivityPenalty1;
-        if (_config.Hunger <= AnimalConfig.LowHungerThreshold2) _config.Productivity -= AnimalConfig.ProductivityPenalty2;
-        if (_config.Hunger <= AnimalConfig.LowHungerThreshold3) _config.Productivity -= AnimalConfig.ProductivityPenalty3;
+        if (_config.Hunger <= AnimalConfig.LowHungerThreshold1)
+            _config.Productivity -= AnimalConfig.ProductivityPenalty1;
+        if (_config.Hunger <= AnimalConfig.LowHungerThreshold2)
+            _config.Productivity -= AnimalConfig.ProductivityPenalty2;
+        if (_config.Hunger <= AnimalConfig.LowHungerThreshold3)
+            _config.Productivity -= AnimalConfig.ProductivityPenalty3;
 
         if (_config.Hunger == 0)
         {
@@ -82,8 +93,9 @@ public abstract class Animal : IAnimal
 
         _config.Productivity = CalculateProductivityByAgeAndHealth();
         if (_config.Productivity == 0)
-            throw new AnimalMissingProductException("У животного не инициализировано поле Product");
-        
+            throw new AnimalMissingProductException(
+                "У животного не инициализировано поле Product");
+
         _config.Product?.Produce(_config.Productivity);
     }
 
@@ -96,8 +108,9 @@ public abstract class Animal : IAnimal
     protected void GoToToilet()
     {
         if (Place == null)
-            throw new AnimalInvalidPlaceStateException("Животное не может загрязнять территорию, если его местоположение не задано");
-        
+            throw new AnimalInvalidPlaceStateException(
+                "Животное не может загрязнять территорию, если его местоположение не задано");
+
         Place.IncreaseDirtiness(_config.DirtinessPerToilet);
     }
 
@@ -107,6 +120,7 @@ public abstract class Animal : IAnimal
             _config.Age <= _config.AdultAgeLimit ? _config.MaxProductivity :
             _config.Age <= _config.OldAgeLimit ? _config.ProductivityMiddle : _config.ProductivityOld;
 
-        return Math.Clamp(prod - (_config.MaxHealth - _config.Health) / 2, _config.MinProductivity, _config.MaxProductivity);
+        return Math.Clamp(prod - (_config.MaxHealth - _config.Health) / 2, _config.MinProductivity,
+            _config.MaxProductivity);
     }
 }

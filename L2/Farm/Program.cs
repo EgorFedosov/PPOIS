@@ -7,6 +7,7 @@ using Farm.Interfaces;
 using Farm.Machines.Attachable;
 using Farm.Machines.SelfPropelled;
 using Farm.Places;
+
 namespace Farm;
 
 public static class Program
@@ -15,34 +16,33 @@ public static class Program
     {
         var warehouse = new Warehouse("Главный склад");
         var barn = new Barn("Большой амбар");
-        
+
         var goat = new Goat();
         var rabbit = new Rabbit();
         var animals = new List<IAnimal> { goat, rabbit };
         foreach (var animal in animals)
         {
             animal.MoveTo(barn);
-
             for (int i = 0; i < 10; i++)
             {
                 animal.Update();
             }
-
+            animal.PrintStats();
             animal.Eat(10);
             animal.PrintStats();
         }
-        
+
         var farmer = new Farmer(warehouse);
         farmer.MoveTo(barn);
         farmer.Work();
-        
+
         var potatoField = new PotatoField();
         for (int i = 0; i < 10; i++)
         {
             potatoField.Update();
             potatoField.Fertilize();
         }
-        
+
         var equipmentOperator = new EquipmentOperator(warehouse);
         var fieldWorker1 = new FieldWorker(warehouse, new EmployeeConfig
         {
@@ -55,7 +55,7 @@ public static class Program
         {
             worker.MoveTo(potatoField);
         }
-        
+
         var harvester = new Harvester("Harvester-23-123");
         harvester.MoveTo(potatoField);
 
@@ -63,7 +63,7 @@ public static class Program
         var plow = new Plow("Plow21-4");
         tractor.Attach(plow);
         tractor.MoveTo(potatoField);
-        
+
         equipmentOperator.SitInMachine(harvester);
         harvester.TurnOn();
         for (int i = 0; i < 20; i++)
@@ -85,7 +85,7 @@ public static class Program
         tractor.TurnOn();
         equipmentOperator.Work();
         fieldWorker1.Work();
-        
+
         var salesManager = new SalesManager(warehouse, new EmployeeConfig
         {
             Name = "Елена",
