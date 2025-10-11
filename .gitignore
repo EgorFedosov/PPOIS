@@ -5,6 +5,7 @@
 **/bin/
 **/obj/
 **/*.txt
+!L1/SetAndMatrixTests/MatrixData/*.txt  
 **/*.json
 **/.id
 **/.yaml
