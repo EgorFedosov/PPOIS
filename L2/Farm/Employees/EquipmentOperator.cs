@@ -16,8 +16,6 @@ public class EquipmentOperator(Warehouse warehouse, EmployeeConfig? config = nul
     };
 
     private readonly EmployeeConfig _config = config ?? DefaultConfig;
-
-    public string? Name => _config.Name;
     public IMachine? CurrentMachine { get; private set; }
 
     public void SitInMachine(IMachine machine)
@@ -44,12 +42,8 @@ public class EquipmentOperator(Warehouse warehouse, EmployeeConfig? config = nul
 
     public override void Work()
     {
-        if (Warehouse == null)
-            throw new WarehouseNotAssignedException("Склад не установлен");
         if (CurrentMachine == null || _config.Location == null)
             throw new EquipmentOrFieldNotAssignedException("Не задана техника или поле");
-        if (CurrentMachine.Driver != this)
-            throw new DriverNotAssignedException("Водитель не назначен");
         if (!CurrentMachine.IsOn)
             throw new MachineNotOnException("Техника выключена");
 

@@ -12,16 +12,26 @@ public class Warehouse : Place
     {
         _products[SeedKey] = 10000;
     }
+    
 
     public void Store(Product product)
     {
+        if (product == null)
+            throw new ArgumentNullException(nameof(product));
+
         product.HandleAfterCollection();
-        _products.TryAdd(product, 0);
+
+        if (!_products.TryAdd(product, 0))
+            throw new InvalidOperationException($"Продукт {product} уже существует в хранилище.");
+
         _products[product] += (uint)product.Amount;
 
-        _products.TryAdd(SeedKey, 0);
+        if (!_products.TryAdd(SeedKey, 0))
+            throw new InvalidOperationException($"Ключ {SeedKey} уже существует в хранилище.");
+
         _products[SeedKey] += (uint)Math.Floor(product.Amount * 0.1);
     }
+
 
     public uint TakeSeeds(uint requestedCount)
     {

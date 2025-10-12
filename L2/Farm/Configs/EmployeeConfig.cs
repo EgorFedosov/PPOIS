@@ -26,7 +26,7 @@ public class EmployeeConfig
     }
 
 
-    public string? Name { get; init; }
+    public string Name { get; init; } = "Default";
 
     public int Age
     {

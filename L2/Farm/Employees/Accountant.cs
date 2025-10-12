@@ -1,5 +1,6 @@
 using Farm.Configs;
 using Farm.Interfaces;
+
 namespace Farm.Employees;
 
 public class Accountant(IEnumerable<IWorker> employees, EmployeeConfig? config = null)
@@ -26,7 +27,7 @@ public class Accountant(IEnumerable<IWorker> employees, EmployeeConfig? config =
     private void PayEmployee(IWorker employee)
     {
         var rate = _salaryConfig.GetRate(employee);
-        var salary = rate * employee.GetWorkCount();
+        var salary = rate * employee.WorkCount();
         if (salary < SalaryConfig.GetMinSalary())
             salary = SalaryConfig.GetMinSalary();
 
@@ -34,15 +35,15 @@ public class Accountant(IEnumerable<IWorker> employees, EmployeeConfig? config =
         PromoteIfNeeded(employee);
 
         employee.ResetWorkCount();
-        Console.WriteLine($"Начислено {salary} {employee.GetName()} ({employee.GetType().Name})");
+        Console.WriteLine($"Начислено {salary} {employee.Name} ({employee.GetType().Name})");
     }
 
     private void PromoteIfNeeded(IWorker employee)
     {
         var thresholds = _salaryConfig.GetPromotionThresholds(employee);
-        var currentLevel = employee.GetLevel();
-        if ((int)currentLevel < thresholds.Count && employee.GetWorkCount() >= thresholds[(int)currentLevel])
-            employee.SetLevel((EmployeeLevel)((int)currentLevel + 1));
+        var currentLevel = employee.Level;
+        if ((int)currentLevel < thresholds.Count && employee.WorkCount() >= thresholds[(int)currentLevel])
+            employee.Level = ((EmployeeLevel)((int)currentLevel + 1));
     }
 
     public override void StopWork()

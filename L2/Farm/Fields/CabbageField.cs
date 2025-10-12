@@ -5,6 +5,7 @@ namespace Farm.Fields;
 
 public class CabbageField(FieldConfig? config = null) : Field(config ?? DefaultConfig)
 {
+
     private static readonly FieldConfig DefaultConfig = new()
     {
         Name = "Cabbage field",

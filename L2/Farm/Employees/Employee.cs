@@ -9,6 +9,7 @@ public abstract class Employee : IWorker
 {
     private readonly EmployeeConfig _config;
     private Place? _location;
+    public string Name => _config.Name;
 
     protected Employee(EmployeeConfig config)
     {
@@ -43,18 +44,16 @@ public abstract class Employee : IWorker
         Location = newPlace;
     }
 
-    public string? GetName() => _config.Name;
-
-    public int GetWorkCount() => _config.WorkCount;
+    public int WorkCount() => _config.WorkCount;
 
     public void ResetWorkCount() => _config.WorkCount = 0;
 
-    public EmployeeLevel GetLevel() => _config.Level;
-
-    public void SetLevel(EmployeeLevel level) => _config.Level = level;
-
-
-
+    public EmployeeLevel Level
+    {
+        get => _config.Level;
+        set => _config.Level = value;
+    }
+    
     public void ReceiveSalary(decimal amount) => _config.Balance += amount < 0 ? 0 : amount;
 
     public abstract void Work();

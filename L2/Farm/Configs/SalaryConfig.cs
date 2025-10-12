@@ -71,7 +71,7 @@ public class SalaryConfig
         var typeName = employee.GetType().Name;
         return !LimitsByType.TryGetValue(typeName, out var data)
             ? 0
-            : data.Rates[employee.GetLevel()];
+            : data.Rates[employee.Level];
     }
 
     public List<int> GetPromotionThresholds(IWorker employee)

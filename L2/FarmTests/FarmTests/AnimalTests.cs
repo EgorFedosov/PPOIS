@@ -8,7 +8,7 @@ namespace FarmTests;
 
 public class AnimalTest
 {
-    private string CaptureConsoleOutput(Action action)
+    private static string CaptureConsoleOutput(Action action)
     {
         var originalOut = Console.Out;
         using var sw = new StringWriter();
@@ -24,12 +24,13 @@ public class AnimalTest
     [Fact]
     public void Animal_Creation_PrintsName()
     {
+        Chicken? chicken = null;
         var output = CaptureConsoleOutput(() =>
         {
-            var chicken = new Chicken();
+             chicken = new Chicken();
         });
 
-        Assert.Contains("Chicken", output);
+        Assert.Contains($"{chicken?.Name}", output);
     }
 
     [Fact]

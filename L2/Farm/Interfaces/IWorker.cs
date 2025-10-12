@@ -13,13 +13,13 @@ namespace Farm.Interfaces
         ///     Получает количество выполненной работы.
         /// </summary>
         /// <returns>Количество выполненной работы.</returns>
-        int GetWorkCount();
+       public int WorkCount();
 
         /// <summary>
         ///     Получает имя работника.
         /// </summary>
         /// <returns>Имя работника.</returns>
-        string? GetName();
+        public string Name { get; }
 
         /// <summary>
         ///     Сбрасывает счётчик выполненной работы.
@@ -27,17 +27,11 @@ namespace Farm.Interfaces
         void ResetWorkCount();
 
         /// <summary>
-        ///     Получает текущий уровень работника.
+        ///     Получает текущий уровень работника и  устанавливает уровень работника.
         /// </summary>
         /// <returns>Уровень работника.</returns>
-        EmployeeLevel GetLevel();
-
-        /// <summary>
-        ///     Устанавливает уровень работника.
-        /// </summary>
-        /// <param name="level">Новый уровень.</param>
-        void SetLevel(EmployeeLevel level);
-
+        public EmployeeLevel Level { get; set; }
+        
         /// <summary>
         ///     Начинает выполнение работы.
         /// </summary>
