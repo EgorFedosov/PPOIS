@@ -2,30 +2,14 @@ using Farm.Products;
 using Farm.Animals;
 using Farm.Places;
 using Farm.Exceptions;
+using static FarmTests.TestUtils;
 
 
 namespace FarmTests;
 
 public class AnimalTest
 {
-    private static string CaptureConsoleOutput(Action action)
-    {
-        var originalOut = Console.Out;
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
-
-        try
-        {
-            action();
-            return sw.ToString();
-        }
-        finally
-        {
-            Console.SetOut(originalOut);
-        }
-    }
-
-
+  
     [Fact]
     public void Animal_Creation_PrintsName()
     {

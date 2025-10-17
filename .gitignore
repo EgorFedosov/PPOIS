@@ -9,3 +9,5 @@
 **/*.json
 **/.id
 **/.yaml
+**/*.xml
+**/*.dcvr

@@ -4,7 +4,7 @@ using Farm.Employees;
 using Farm.Warehouses;
 using Farm.Fields;
 using Farm.Exceptions;
-using Farm.Machines.Attachable;
+using static FarmTests.TestUtils;
 using Farm.Machines.SelfPropelled;
 using Farm.Places;
 using Farm.Products;
@@ -13,23 +13,6 @@ namespace FarmTests;
 
 public class EquipmentOperatorFieldTests
 {
-    private static string CaptureConsoleOutput(Action action)
-    {
-        var originalOut = Console.Out;
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
-
-        try
-        {
-            action();
-            return sw.ToString();
-        }
-        finally
-        {
-            Console.SetOut(originalOut);
-        }
-    }
-
     [Fact]
     public void Operator_Creation_PrintsName()
     {

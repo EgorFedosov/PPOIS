@@ -4,28 +4,13 @@ using Farm.Fields;
 using Farm.Machines.Attachable;
 using Farm.Machines.SelfPropelled;
 using Farm.Warehouses;
+using static FarmTests.TestUtils;
 
 namespace FarmTests;
 
 public class MachineTests
 {
-    private static string CaptureConsoleOutput(Action action)
-    {
-        var originalOut = Console.Out;
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
-
-        try
-        {
-            action();
-            return sw.ToString();
-        }
-        finally
-        {
-            Console.SetOut(originalOut);
-        }
-    }
-
+   
     [Fact]
     public void Tractor_Attach_AddsAttachmentToAttachmentsList()
     {
