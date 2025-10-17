@@ -30,7 +30,7 @@ public class SalesManager(Warehouse warehouse, EmployeeConfig? config = null)
         _config.WorkCount++;
     }
 
-    private decimal Sell(Product product, uint quantity)
+    public decimal Sell(Product product, uint quantity)
     {
         if (Warehouse.TakeProduct(product, quantity))
         {

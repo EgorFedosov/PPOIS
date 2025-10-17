@@ -14,10 +14,15 @@ public class AnimalTest
         using var sw = new StringWriter();
         Console.SetOut(sw);
 
-        action();
-
-        Console.SetOut(originalOut);
-        return sw.ToString();
+        try
+        {
+            action();
+            return sw.ToString();
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+        }
     }
 
 

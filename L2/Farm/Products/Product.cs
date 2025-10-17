@@ -14,7 +14,7 @@ public abstract class Product(ProductConfig config)
         return config.Freshness / 100.0m;
     }
 
-    protected void Update()
+    public void Update()
     {
         if (config.Damage >= ProductConfig.LowDamageThreshold1)
             config.Freshness = Math.Max(0, config.Freshness - config.DamageLevel1);

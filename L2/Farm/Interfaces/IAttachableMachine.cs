@@ -13,5 +13,6 @@ namespace Farm.Interfaces
         /// </summary>
         /// <param name="tractor">Трактор, к которому нужно прицепить устройство, или <see langword="null"/> для отсоединения.</param>
         void SetTractor(Tractor? tractor);
+   
     }
 }

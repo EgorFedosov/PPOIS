@@ -18,7 +18,7 @@ public class FieldWorker(Warehouse warehouse, EmployeeConfig? config = null)
 
     private readonly EmployeeConfig _config = config ?? DefaultConfig;
 
-    private EquipmentOperator? PartnerOperator { get; set; }
+    public EquipmentOperator? PartnerOperator { get; set; }
     private Tractor? CurrentTractor => PartnerOperator?.CurrentMachine as Tractor;
 
     public override void Work()
@@ -51,7 +51,7 @@ public class FieldWorker(Warehouse warehouse, EmployeeConfig? config = null)
         PartnerOperator = null;
     }
 
-    private void AssistOperator()
+    public void AssistOperator()
     {
         if (CurrentTractor == null) return;
 

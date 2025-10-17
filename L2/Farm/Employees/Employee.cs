@@ -10,6 +10,8 @@ public abstract class Employee : IWorker
     private readonly EmployeeConfig _config;
     private Place? _location;
     public string Name => _config.Name;
+    public int  Age => _config.Age;
+ 
 
     protected Employee(EmployeeConfig config)
     {
@@ -22,7 +24,7 @@ public abstract class Employee : IWorker
         }
     }
 
-    private Place? Location
+    public Place? Location
     {
         get => _location;
         set

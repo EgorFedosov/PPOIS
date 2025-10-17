@@ -7,6 +7,7 @@ namespace Farm.Fields;
 
 public abstract class Field(FieldConfig config) : Place(config.Name)
 {
+    public int SoilCareLevel => config.SoilCareLevel;
     public void Update()
     {
         config.Productivity = (int)Math.Round(CalculateProductivity());

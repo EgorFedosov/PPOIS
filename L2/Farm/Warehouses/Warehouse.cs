@@ -21,14 +21,7 @@ public class Warehouse : Place
 
         product.HandleAfterCollection();
 
-        if (!_products.TryAdd(product, 0))
-            throw new InvalidOperationException($"Продукт {product} уже существует в хранилище.");
-
-        _products[product] += (uint)product.Amount;
-
-        if (!_products.TryAdd(SeedKey, 0))
-            throw new InvalidOperationException($"Ключ {SeedKey} уже существует в хранилище.");
-
+        _products[product] = _products.GetValueOrDefault(product) + (uint)product.Amount;
         _products[SeedKey] += (uint)Math.Floor(product.Amount * 0.1);
     }
 
