@@ -141,7 +141,16 @@ public class Graph<T> : IEnumerable<T>, IEquatable<Graph<T>>
 
     public override bool Equals(object? obj) => Equals(obj as Graph<T>);
 
-    public override int GetHashCode() => _vertices.Aggregate(0, (acc, v) => acc ^ (v?.GetHashCode() ?? 0));
+    public override int GetHashCode()
+    {
+        int hash = 17;
+        foreach (var v in _vertices)
+        {
+            hash = hash * 31 + (v?.GetHashCode() ?? 0);
+        }
+        return hash;
+    }
+
     public static bool operator ==(Graph<T> a, Graph<T> b) => EqualityComparer<Graph<T>>.Default.Equals(a, b);
     public static bool operator !=(Graph<T> a, Graph<T> b) => !(a == b);
 
