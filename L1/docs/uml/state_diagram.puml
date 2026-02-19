@@ -1,0 +1,33 @@
+﻿@startuml
+skinparam linetype ortho
+[*] --> IDLE
+
+IDLE --> HEATING : heat_pan()
+HEATING --> HEATING : add_oil()
+HEATING --> COOKING : break_eggs()
+COOKING --> COOKING : add_oil()
+COOKING --> SEASONING : add_spices()
+SEASONING --> SEASONING : add_oil()
+SEASONING --> SEASONING : add_spices()
+COOKING --> FINISHING : fry_eggs()
+SEASONING --> FINISHING : fry_eggs()
+FINISHING --> SERVED : mix_and_serve()
+SERVED --> [*]
+
+note right of HEATING
+  Разогрев возможен только из начального состояния
+end note
+
+note right of COOKING
+  Разбить яйца можно только на горячей сковороде
+end note
+
+note right of SEASONING
+  Добавление приправ допускается повторно
+  без смены состояния
+end note
+
+note right of FINISHING
+  Перед подачей яйца должны быть обжарены
+end note
+@enduml

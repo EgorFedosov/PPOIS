@@ -1,0 +1,16 @@
+**/*.user
+**/*.suo
+
+**/.idea/
+**/bin/
+**/obj/
+**/*.txt
+!L1/SetAndMatrixTests/MatrixData/*.txt  
+**/*.json
+**/.id
+**/.yaml
+**/*.xml
+**/*.dcvr
+
+venv/
+__pycache__/
