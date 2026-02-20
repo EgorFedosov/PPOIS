@@ -1,33 +1,49 @@
-﻿@startuml
+@startuml
+title Диаграмма состояний процесса приготовления
 skinparam linetype ortho
-[*] --> IDLE
+skinparam monochrome true
+skinparam shadowing false
 
-IDLE --> HEATING : heat_pan()
-HEATING --> HEATING : add_oil()
-HEATING --> COOKING : break_eggs()
-COOKING --> COOKING : add_oil()
-COOKING --> SEASONING : add_spices()
-SEASONING --> SEASONING : add_oil()
-SEASONING --> SEASONING : add_spices()
-COOKING --> FINISHING : fry_eggs()
-SEASONING --> FINISHING : fry_eggs()
-FINISHING --> SERVED : mix_and_serve()
-SERVED --> [*]
+[*] --> ОЖИДАНИЕ : старт
 
-note right of HEATING
-  Разогрев возможен только из начального состояния
+ОЖИДАНИЕ --> РАЗОГРЕВ : разогреть_сковороду()
+РАЗОГРЕВ --> РАЗОГРЕВ : добавить_масло()
+РАЗОГРЕВ --> ГОТОВКА : разбить_яйца()
+ГОТОВКА --> ГОТОВКА : добавить_масло()
+ГОТОВКА --> ПРИПРАВЫ : добавить_приправы()
+ПРИПРАВЫ --> ПРИПРАВЫ : добавить_масло()
+ПРИПРАВЫ --> ПРИПРАВЫ : добавить_приправы()
+ГОТОВКА --> ФИНАЛ : обжарить_яйца()
+ПРИПРАВЫ --> ФИНАЛ : обжарить_яйца()
+ФИНАЛ --> ПОДАНО : перемешать_и_подать()
+
+ПОДАНО --> [*] : завершение
+
+note right of РАЗОГРЕВ
+  Условие: переход в РАЗОГРЕВ
+  допускается только из состояния ОЖИДАНИЕ
 end note
 
-note right of COOKING
-  Разбить яйца можно только на горячей сковороде
+note right of ГОТОВКА
+  Условие: разбивание яиц возможно
+  только при нагретой сковороде
 end note
 
-note right of SEASONING
-  Добавление приправ допускается повторно
+note right of ПРИПРАВЫ
+  Добавление масла и приправ
+  допускается повторно
   без смены состояния
 end note
 
-note right of FINISHING
-  Перед подачей яйца должны быть обжарены
+note right of ФИНАЛ
+  Перед подачей яйцо должно иметь
+  состояние ЖАРЕНОЕ
 end note
+
+legend right
+  Состояния: вершины
+  Подписи на стрелках: операции перехода
+endlegend
+
 @enduml
+

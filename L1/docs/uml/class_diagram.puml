@@ -1,69 +1,69 @@
-﻿@startuml
+@startuml
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
 
-class Stove {
-  +is_on: bool
-  +turn_on(): None
-  +turn_off(): None
+class "Плита" as Stove {
+  +включена: bool
+  +включить(): None
+  +выключить(): None
 }
 
-class Pan {
-  +is_hot: bool
-  +contents: list[object]
-  +add(ingredient: object): None
-  +clear(): None
-  +heat(): None
-  +cool(): None
+class "Сковорода" as Pan {
+  +горячая: bool
+  +содержимое: list[object]
+  +добавить(ингредиент: object): None
+  +очистить(): None
+  +нагреть(): None
+  +остудить(): None
 }
 
-class Spatula {
-  +mix(pan: Pan): None
+class "Лопатка" as Spatula {
+  +перемешать(сковорода: Pan): None
 }
 
-class Egg {
-  +is_broken: bool
-  +state: EggState
-  +break_egg(): None
-  +fry(): None
+class "Яйцо" as Egg {
+  +разбито: bool
+  +состояние: EggState
+  +разбить(): None
+  +обжарить(): None
 }
 
-class Oil
-class Spices
+class "Масло" as Oil
+class "Приправы" as Spices
 
-enum EggState {
-  RAW
-  FRIED
+enum "СостояниеЯйца" as EggState {
+  СЫРОЕ
+  ЖАРЕНОЕ
 }
 
-enum CookingState {
-  IDLE
-  HEATING
-  COOKING
-  SEASONING
-  FINISHING
-  SERVED
+enum "СостояниеГотовки" as CookingState {
+  ОЖИДАНИЕ
+  РАЗОГРЕВ
+  ГОТОВКА
+  ПРИПРАВЫ
+  ФИНАЛ
+  ПОДАНО
 }
 
-class CookingProcess {
-  +state: CookingState
-  +oil_added: bool
-  +spices_added: bool
-  +is_mixed: bool
-  +heat_pan(): str
-  +break_eggs(): str
-  +add_oil(): str
-  +add_spices(): str
-  +fry_eggs(): str
-  +mix_and_serve(): str
-  +snapshot(): dict
-  +from_snapshot(data: dict): CookingProcess
-  -_parse_state(raw_state: object): CookingState
+class "ПроцессГотовки" as CookingProcess {
+  +состояние: CookingState
+  +масло_добавлено: bool
+  +приправы_добавлены: bool
+  +перемешано: bool
+  +разогреть_сковороду(): str
+  +разбить_яйца(): str
+  +добавить_масло(): str
+  +добавить_приправы(): str
+  +обжарить_яйца(): str
+  +перемешать_и_подать(): str
+  +снимок(): dict
+  +из_снимка(данные: dict): CookingProcess
+  -_разобрать_состояние(сырое_состояние: object): CookingState
 }
 
-class CookingError
-class EggError
-class InvalidStateTransitionError
+class "ОшибкаГотовки" as CookingError
+class "ОшибкаЯйца" as EggError
+class "ОшибкаПереходаСостояния" as InvalidStateTransitionError
 
 CookingProcess o-- Stove
 CookingProcess o-- Pan
