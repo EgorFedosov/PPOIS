@@ -1,13 +1,26 @@
-﻿# Модель готовки яичницы (CLI)
+# Модель готовки яичницы (CLI)
 
-Проект моделирует процесс приготовления яичницы как конечный автомат с управлением через консоль.
+Консольное приложение, которое моделирует приготовление яичницы как конечный автомат.
 
-## Реализовано
-- Сущности предметной области: яйцо, сковорода, масло, приправы, плита, лопатка.
-- Операции варианта: разогрев сковороды, разбивание яиц, добавление приправ, обжаривание, перемешивание и подача.
-- Обработка ошибок через собственные исключения.
-- Сохранение и восстановление состояния между запусками (JSON).
-- Unit-тесты для бизнес-логики и хранения.
+## Что реализовано
+- Предметные сущности: `Stove`, `Pan`, `Spatula`, `Egg`, `Oil`, `Spices`.
+- Контроллер процесса: `CookingProcess`.
+- Состояния процесса: `IDLE`, `HEATING`, `COOKING`, `SEASONING`, `FINISHING`, `SERVED`.
+- Операции сценария:
+  - `heat_pan()`
+  - `break_eggs()`
+  - `add_oil()`
+  - `add_spices()`
+  - `fry_eggs()`
+  - `mix_and_serve()`
+- Сохранение/восстановление состояния:
+  - `snapshot()`
+  - `from_snapshot(...)`
+  - `JsonStorage` (`data/state.json`)
+- Пользовательские исключения:
+  - `CookingError`
+  - `EggError`
+  - `InvalidStateTransitionError`
 
 ## Запуск
 ```bash
@@ -16,15 +29,18 @@ python main.py
 
 ## Тесты
 ```bash
-PYTHONPATH=. pytest -q tests
+pytest -q
 ```
 
-## Структура
-- `main.py` - точка входа.
-- `src/models/` - сущности и конечный автомат.
-- `src/ui/menu.py` - консольный интерфейс.
-- `src/storage/json_storage.py` - сохранение состояния в JSON.
-- `src/exceptions.py` - пользовательские исключения.
-- `tests/` - unit-тесты.
-- `docs/uml/` - UML 2.x диаграммы (PlantUML).
-
+## Структура проекта
+- `main.py` - точка входа, создание процесса и запуск меню.
+- `src/models/entities.py` - доменные сущности и `EggState`.
+- `src/models/cooking_process.py` - конечный автомат (`CookingProcess`, `CookingState`).
+- `src/storage/json_storage.py` - JSON-хранилище состояния.
+- `src/ui/menu.py` - CLI-меню и автосохранение.
+- `src/exceptions.py` - доменные исключения.
+- `tests/test_cooking_process.py` - unit-тесты бизнес-логики.
+- `tests/test_json_storage.py` - unit-тесты хранения.
+- `docs/system.md` - описание системы.
+- `docs/uml/class_diagram.puml` - диаграмма классов (PlantUML).
+- `docs/uml/state_diagram.puml` - диаграмма состояний (PlantUML).
