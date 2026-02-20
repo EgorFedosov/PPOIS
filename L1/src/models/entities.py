@@ -1,4 +1,4 @@
-"""Domain entities for the cooking simulation."""
+"""Доменные сущности для симуляции процесса готовки."""
 
 from dataclasses import dataclass, field
 from enum import Enum
@@ -13,7 +13,7 @@ class EggState(str, Enum):
 
 @dataclass
 class Stove:
-    """Provides heat for cooking."""
+    """Обеспечивает нагрев для приготовления."""
 
     is_on: bool = False
 
@@ -26,7 +26,7 @@ class Stove:
 
 @dataclass
 class Pan:
-    """Container for ingredients that can become hot."""
+    """Контейнер для ингредиентов, который может нагреваться."""
 
     is_hot: bool = False
     contents: list[object] = field(default_factory=list)
@@ -46,7 +46,7 @@ class Pan:
 
 @dataclass
 class Spatula:
-    """Tool for stirring pan contents."""
+    """Инструмент для перемешивания содержимого сковороды."""
 
     def mix(self, pan: Pan) -> None:
         pan.contents = list(reversed(pan.contents))
@@ -54,7 +54,7 @@ class Spatula:
 
 @dataclass
 class Egg:
-    """Main product with simple lifecycle."""
+    """Основной продукт с простым жизненным циклом."""
 
     is_broken: bool = False
     state: EggState = EggState.RAW
@@ -70,13 +70,13 @@ class Egg:
 
 @dataclass(frozen=True)
 class Oil:
-    """Ingredient marker entity."""
+    """Сущность-маркер ингредиента."""
 
     name: str = "oil"
 
 
 @dataclass(frozen=True)
 class Spices:
-    """Ingredient marker entity."""
+    """Сущность-маркер ингредиента."""
 
     name: str = "spices"
