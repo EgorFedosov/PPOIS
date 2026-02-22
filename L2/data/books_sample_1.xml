@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<library>
+  <book>
+    <title>История математики: выпуск 1</title>
+    <author>Иванов Иван Иванович</author>
+    <publisher>Наука</publisher>
+    <volumes>1</volumes>
+    <circulation>1235</circulation>
+  </book>
+  <book>
+    <title>Теория алгоритмов: выпуск 2</title>
+    <author>Петров Петр Сергеевич</author>
+    <publisher>Питер</publisher>
+    <volumes>2</volumes>
+    <circulation>1270</circulation>
+  </book>
+  <book>
+    <title>Практика программирования: выпуск 3</title>
+    <author>Смирнов Алексей Викторович</author>
+    <publisher>БХВ</publisher>
+    <volumes>3</volumes>
+    <circulation>1305</circulation>
+  </book>
+  <book>
+    <title>Архитектура приложений: выпуск 4</title>
+    <author>Кузнецов Дмитрий Олегович</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>4</volumes>
+    <circulation>1340</circulation>
+  </book>
+  <book>
+    <title>Базы данных: выпуск 5</title>
+    <author>Волкова Мария Андреевна</author>
+    <publisher>Лань</publisher>
+    <volumes>5</volumes>
+    <circulation>1375</circulation>
+  </book>
+  <book>
+    <title>Сетевые технологии: выпуск 6</title>
+    <author>Федорова Анна Игоревна</author>
+    <publisher>АСТ</publisher>
+    <volumes>6</volumes>
+    <circulation>1410</circulation>
+  </book>
+  <book>
+    <title>Машинное обучение: выпуск 7</title>
+    <author>Соколов Николай Павлович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>7</volumes>
+    <circulation>1445</circulation>
+  </book>
+  <book>
+    <title>Системный анализ: выпуск 8</title>
+    <author>Морозова Елена Викторовна</author>
+    <publisher>МИФ</publisher>
+    <volumes>1</volumes>
+    <circulation>1480</circulation>
+  </book>
+  <book>
+    <title>Проектирование интерфейсов: выпуск 9</title>
+    <author>Николаев Артем Денисович</author>
+    <publisher>Наука</publisher>
+    <volumes>2</volumes>
+    <circulation>1515</circulation>
+  </book>
+  <book>
+    <title>Инженерия требований: выпуск 10</title>
+    <author>Егорова Ольга Романовна</author>
+    <publisher>Питер</publisher>
+    <volumes>3</volumes>
+    <circulation>1550</circulation>
+  </book>
+  <book>
+    <title>История математики: выпуск 11</title>
+    <author>Лебедев Максим Константинович</author>
+    <publisher>БХВ</publisher>
+    <volumes>4</volumes>
+    <circulation>1585</circulation>
+  </book>
+  <book>
+    <title>Теория алгоритмов: выпуск 12</title>
+    <author>Орлова Татьяна Сергеевна</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>5</volumes>
+    <circulation>1620</circulation>
+  </book>
+  <book>
+    <title>Практика программирования: выпуск 13</title>
+    <author>Иванов Иван Иванович</author>
+    <publisher>Лань</publisher>
+    <volumes>6</volumes>
+    <circulation>1655</circulation>
+  </book>
+  <book>
+    <title>Архитектура приложений: выпуск 14</title>
+    <author>Петров Петр Сергеевич</author>
+    <publisher>АСТ</publisher>
+    <volumes>7</volumes>
+    <circulation>1690</circulation>
+  </book>
+  <book>
+    <title>Базы данных: выпуск 15</title>
+    <author>Смирнов Алексей Викторович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>1</volumes>
+    <circulation>1725</circulation>
+  </book>
+  <book>
+    <title>Сетевые технологии: выпуск 16</title>
+    <author>Кузнецов Дмитрий Олегович</author>
+    <publisher>МИФ</publisher>
+    <volumes>2</volumes>
+    <circulation>1760</circulation>
+  </book>
+  <book>
+    <title>Машинное обучение: выпуск 17</title>
+    <author>Волкова Мария Андреевна</author>
+    <publisher>Наука</publisher>
+    <volumes>3</volumes>
+    <circulation>1795</circulation>
+  </book>
+  <book>
+    <title>Системный анализ: выпуск 18</title>
+    <author>Федорова Анна Игоревна</author>
+    <publisher>Питер</publisher>
+    <volumes>4</volumes>
+    <circulation>1830</circulation>
+  </book>
+  <book>
+    <title>Проектирование интерфейсов: выпуск 19</title>
+    <author>Соколов Николай Павлович</author>
+    <publisher>БХВ</publisher>
+    <volumes>5</volumes>
+    <circulation>1865</circulation>
+  </book>
+  <book>
+    <title>Инженерия требований: выпуск 20</title>
+    <author>Морозова Елена Викторовна</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>6</volumes>
+    <circulation>1900</circulation>
+  </book>
+  <book>
+    <title>История математики: выпуск 21</title>
+    <author>Николаев Артем Денисович</author>
+    <publisher>Лань</publisher>
+    <volumes>7</volumes>
+    <circulation>1935</circulation>
+  </book>
+  <book>
+    <title>Теория алгоритмов: выпуск 22</title>
+    <author>Егорова Ольга Романовна</author>
+    <publisher>АСТ</publisher>
+    <volumes>1</volumes>
+    <circulation>1970</circulation>
+  </book>
+  <book>
+    <title>Практика программирования: выпуск 23</title>
+    <author>Лебедев Максим Константинович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>2</volumes>
+    <circulation>2005</circulation>
+  </book>
+  <book>
+    <title>Архитектура приложений: выпуск 24</title>
+    <author>Орлова Татьяна Сергеевна</author>
+    <publisher>МИФ</publisher>
+    <volumes>3</volumes>
+    <circulation>2040</circulation>
+  </book>
+  <book>
+    <title>Базы данных: выпуск 25</title>
+    <author>Иванов Иван Иванович</author>
+    <publisher>Наука</publisher>
+    <volumes>4</volumes>
+    <circulation>2075</circulation>
+  </book>
+  <book>
+    <title>Сетевые технологии: выпуск 26</title>
+    <author>Петров Петр Сергеевич</author>
+    <publisher>Питер</publisher>
+    <volumes>5</volumes>
+    <circulation>2110</circulation>
+  </book>
+  <book>
+    <title>Машинное обучение: выпуск 27</title>
+    <author>Смирнов Алексей Викторович</author>
+    <publisher>БХВ</publisher>
+    <volumes>6</volumes>
+    <circulation>2145</circulation>
+  </book>
+  <book>
+    <title>Системный анализ: выпуск 28</title>
+    <author>Кузнецов Дмитрий Олегович</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>7</volumes>
+    <circulation>2180</circulation>
+  </book>
+  <book>
+    <title>Проектирование интерфейсов: выпуск 29</title>
+    <author>Волкова Мария Андреевна</author>
+    <publisher>Лань</publisher>
+    <volumes>1</volumes>
+    <circulation>2215</circulation>
+  </book>
+  <book>
+    <title>Инженерия требований: выпуск 30</title>
+    <author>Федорова Анна Игоревна</author>
+    <publisher>АСТ</publisher>
+    <volumes>2</volumes>
+    <circulation>2250</circulation>
+  </book>
+  <book>
+    <title>История математики: выпуск 31</title>
+    <author>Соколов Николай Павлович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>3</volumes>
+    <circulation>2285</circulation>
+  </book>
+  <book>
+    <title>Теория алгоритмов: выпуск 32</title>
+    <author>Морозова Елена Викторовна</author>
+    <publisher>МИФ</publisher>
+    <volumes>4</volumes>
+    <circulation>2320</circulation>
+  </book>
+  <book>
+    <title>Практика программирования: выпуск 33</title>
+    <author>Николаев Артем Денисович</author>
+    <publisher>Наука</publisher>
+    <volumes>5</volumes>
+    <circulation>2355</circulation>
+  </book>
+  <book>
+    <title>Архитектура приложений: выпуск 34</title>
+    <author>Егорова Ольга Романовна</author>
+    <publisher>Питер</publisher>
+    <volumes>6</volumes>
+    <circulation>2390</circulation>
+  </book>
+  <book>
+    <title>Базы данных: выпуск 35</title>
+    <author>Лебедев Максим Константинович</author>
+    <publisher>БХВ</publisher>
+    <volumes>7</volumes>
+    <circulation>2425</circulation>
+  </book>
+  <book>
+    <title>Сетевые технологии: выпуск 36</title>
+    <author>Орлова Татьяна Сергеевна</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>1</volumes>
+    <circulation>2460</circulation>
+  </book>
+  <book>
+    <title>Машинное обучение: выпуск 37</title>
+    <author>Иванов Иван Иванович</author>
+    <publisher>Лань</publisher>
+    <volumes>2</volumes>
+    <circulation>2495</circulation>
+  </book>
+  <book>
+    <title>Системный анализ: выпуск 38</title>
+    <author>Петров Петр Сергеевич</author>
+    <publisher>АСТ</publisher>
+    <volumes>3</volumes>
+    <circulation>2530</circulation>
+  </book>
+  <book>
+    <title>Проектирование интерфейсов: выпуск 39</title>
+    <author>Смирнов Алексей Викторович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>4</volumes>
+    <circulation>2565</circulation>
+  </book>
+  <book>
+    <title>Инженерия требований: выпуск 40</title>
+    <author>Кузнецов Дмитрий Олегович</author>
+    <publisher>МИФ</publisher>
+    <volumes>5</volumes>
+    <circulation>2600</circulation>
+  </book>
+  <book>
+    <title>История математики: выпуск 41</title>
+    <author>Волкова Мария Андреевна</author>
+    <publisher>Наука</publisher>
+    <volumes>6</volumes>
+    <circulation>2635</circulation>
+  </book>
+  <book>
+    <title>Теория алгоритмов: выпуск 42</title>
+    <author>Федорова Анна Игоревна</author>
+    <publisher>Питер</publisher>
+    <volumes>7</volumes>
+    <circulation>2670</circulation>
+  </book>
+  <book>
+    <title>Практика программирования: выпуск 43</title>
+    <author>Соколов Николай Павлович</author>
+    <publisher>БХВ</publisher>
+    <volumes>1</volumes>
+    <circulation>2705</circulation>
+  </book>
+  <book>
+    <title>Архитектура приложений: выпуск 44</title>
+    <author>Морозова Елена Викторовна</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>2</volumes>
+    <circulation>2740</circulation>
+  </book>
+  <book>
+    <title>Базы данных: выпуск 45</title>
+    <author>Николаев Артем Денисович</author>
+    <publisher>Лань</publisher>
+    <volumes>3</volumes>
+    <circulation>2775</circulation>
+  </book>
+  <book>
+    <title>Сетевые технологии: выпуск 46</title>
+    <author>Егорова Ольга Романовна</author>
+    <publisher>АСТ</publisher>
+    <volumes>4</volumes>
+    <circulation>2810</circulation>
+  </book>
+  <book>
+    <title>Машинное обучение: выпуск 47</title>
+    <author>Лебедев Максим Константинович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>5</volumes>
+    <circulation>2845</circulation>
+  </book>
+  <book>
+    <title>Системный анализ: выпуск 48</title>
+    <author>Орлова Татьяна Сергеевна</author>
+    <publisher>МИФ</publisher>
+    <volumes>6</volumes>
+    <circulation>2880</circulation>
+  </book>
+  <book>
+    <title>Проектирование интерфейсов: выпуск 49</title>
+    <author>Иванов Иван Иванович</author>
+    <publisher>Наука</publisher>
+    <volumes>7</volumes>
+    <circulation>2915</circulation>
+  </book>
+  <book>
+    <title>Инженерия требований: выпуск 50</title>
+    <author>Петров Петр Сергеевич</author>
+    <publisher>Питер</publisher>
+    <volumes>1</volumes>
+    <circulation>2950</circulation>
+  </book>
+  <book>
+    <title>История математики: выпуск 51</title>
+    <author>Смирнов Алексей Викторович</author>
+    <publisher>БХВ</publisher>
+    <volumes>2</volumes>
+    <circulation>2985</circulation>
+  </book>
+  <book>
+    <title>Теория алгоритмов: выпуск 52</title>
+    <author>Кузнецов Дмитрий Олегович</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>3</volumes>
+    <circulation>3020</circulation>
+  </book>
+  <book>
+    <title>Практика программирования: выпуск 53</title>
+    <author>Волкова Мария Андреевна</author>
+    <publisher>Лань</publisher>
+    <volumes>4</volumes>
+    <circulation>3055</circulation>
+  </book>
+  <book>
+    <title>Архитектура приложений: выпуск 54</title>
+    <author>Федорова Анна Игоревна</author>
+    <publisher>АСТ</publisher>
+    <volumes>5</volumes>
+    <circulation>3090</circulation>
+  </book>
+  <book>
+    <title>Базы данных: выпуск 55</title>
+    <author>Соколов Николай Павлович</author>
+    <publisher>Эксмо</publisher>
+    <volumes>6</volumes>
+    <circulation>3125</circulation>
+  </book>
+  <book>
+    <title>Сетевые технологии: выпуск 56</title>
+    <author>Морозова Елена Викторовна</author>
+    <publisher>МИФ</publisher>
+    <volumes>7</volumes>
+    <circulation>3160</circulation>
+  </book>
+  <book>
+    <title>Машинное обучение: выпуск 57</title>
+    <author>Николаев Артем Денисович</author>
+    <publisher>Наука</publisher>
+    <volumes>1</volumes>
+    <circulation>3195</circulation>
+  </book>
+  <book>
+    <title>Системный анализ: выпуск 58</title>
+    <author>Егорова Ольга Романовна</author>
+    <publisher>Питер</publisher>
+    <volumes>2</volumes>
+    <circulation>3230</circulation>
+  </book>
+  <book>
+    <title>Проектирование интерфейсов: выпуск 59</title>
+    <author>Лебедев Максим Константинович</author>
+    <publisher>БХВ</publisher>
+    <volumes>3</volumes>
+    <circulation>3265</circulation>
+  </book>
+  <book>
+    <title>Инженерия требований: выпуск 60</title>
+    <author>Орлова Татьяна Сергеевна</author>
+    <publisher>ДМК Пресс</publisher>
+    <volumes>4</volumes>
+    <circulation>3300</circulation>
+  </book>
+</library>

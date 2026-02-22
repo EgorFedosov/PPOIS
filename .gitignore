@@ -4,13 +4,15 @@
 **/.idea/
 **/bin/
 **/obj/
-**/*.txt
+**/*.pdf
 !L1/SetAndMatrixTests/MatrixData/*.txt  
 **/*.json
 **/.id
 **/.yaml
-**/*.xml
 **/*.dcvr
 
 venv/
 __pycache__/
+
+L3/
+L4/
