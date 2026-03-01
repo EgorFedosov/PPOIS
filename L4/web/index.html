@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ЛР4: Модель готовки</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-top: #fff6e7;
+        --bg-bottom: #f4f8ff;
+        --panel: #ffffff;
+        --accent: #cc6a2d;
+        --accent-soft: #ffe5d2;
+        --text-main: #1f2a37;
+      }
+
+      body {
+        font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+        color: var(--text-main);
+        background: linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+        min-height: 100vh;
+      }
+
+      .shell {
+        max-width: 1080px;
+      }
+
+      .hero {
+        border: 0;
+        background: linear-gradient(120deg, #fff1e3, #fff, #e9f2ff);
+        box-shadow: 0 10px 25px rgba(30, 58, 138, 0.08);
+      }
+
+      .panel {
+        border: 0;
+        background: var(--panel);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        border-radius: 999px;
+        padding: 0.25rem 0.7rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        background: var(--accent-soft);
+        color: #8a3e11;
+      }
+
+      .step {
+        border-radius: 0.65rem;
+        border: 1px solid #dbe5f0;
+        padding: 0.45rem 0.6rem;
+        font-size: 0.82rem;
+        background: #fff;
+      }
+
+      .step.done {
+        border-color: #9ec5fe;
+        background: #e7f1ff;
+      }
+
+      .step.current {
+        border-color: #f2b28a;
+        background: #fff1e8;
+      }
+
+      .action-btn {
+        min-width: 160px;
+      }
+
+      #snapshot {
+        max-height: 280px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container shell py-4 py-md-5">
+      <section class="card hero mb-3">
+        <div class="card-body d-flex flex-column flex-md-row gap-3 justify-content-between">
+          <div>
+            <h1 class="h3 mb-2">Веб-интерфейс модели приготовления яичницы</h1>
+          </div>
+          <div class="d-flex gap-2 align-items-start">
+            <button id="reload-btn" class="btn btn-outline-secondary">Обновить</button>
+            <button id="reset-btn" class="btn btn-outline-danger">Начать заново</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="row g-3 mb-3">
+        <div class="col-lg-4">
+          <div class="card panel h-100">
+            <div class="card-body">
+              <h2 class="h6 mb-3">Текущее состояние</h2>
+              <p class="mb-2"><strong>Процесс:</strong> <span id="process-state" class="chip">-</span></p>
+              <p class="mb-2"><strong>Плита:</strong> <span id="stove-state">-</span></p>
+              <p class="mb-2"><strong>Сковорода:</strong> <span id="pan-state">-</span></p>
+              <p class="mb-2"><strong>Яйцо:</strong> <span id="egg-state">-</span></p>
+              <p class="mb-2"><strong>Масло:</strong> <span id="oil-state">-</span></p>
+              <p class="mb-0"><strong>Приправы:</strong> <span id="spices-state">-</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card panel h-100">
+            <div class="card-body">
+              <h2 class="h6 mb-3">Действия</h2>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-primary action-btn" data-action="heat_pan">Разогреть сковороду</button>
+                <button class="btn btn-primary action-btn" data-action="break_eggs">Разбить яйца</button>
+                <button class="btn btn-primary action-btn" data-action="add_oil">Добавить масло</button>
+                <button class="btn btn-primary action-btn" data-action="add_spices">Добавить приправы</button>
+                <button class="btn btn-warning action-btn" data-action="fry_eggs">Обжарить яйца</button>
+                <button class="btn btn-success action-btn" data-action="mix_and_serve">Перемешать и подать</button>
+              </div>
+              <div id="status" class="alert alert-secondary mt-3 mb-0" role="alert">
+                Готово к работе.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card panel mb-3">
+        <div class="card-body">
+          <h2 class="h6 mb-3">Прогресс по шагам</h2>
+          <div id="steps" class="d-flex flex-wrap gap-2">
+            <span class="step" data-step="idle">Ожидание</span>
+            <span class="step" data-step="heating">Разогрев</span>
+            <span class="step" data-step="cooking">Готовка</span>
+            <span class="step" data-step="seasoning">Приправы</span>
+            <span class="step" data-step="finishing">Финиш</span>
+            <span class="step" data-step="served">Подача</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card panel">
+        <div class="card-body">
+          <h2 class="h6 mb-2">Технический snapshot</h2>
+          <pre id="snapshot" class="mb-0 bg-light p-3 rounded small"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const statusEl = document.getElementById("status");
+      const snapshotEl = document.getElementById("snapshot");
+      const processStateEl = document.getElementById("process-state");
+      const stoveStateEl = document.getElementById("stove-state");
+      const panStateEl = document.getElementById("pan-state");
+      const eggStateEl = document.getElementById("egg-state");
+      const oilStateEl = document.getElementById("oil-state");
+      const spicesStateEl = document.getElementById("spices-state");
+      const resetBtn = document.getElementById("reset-btn");
+      const reloadBtn = document.getElementById("reload-btn");
+
+      const STATE_LABELS = {
+        idle: "ожидание",
+        heating: "разогрев",
+        cooking: "готовка",
+        seasoning: "приправы",
+        finishing: "финиш",
+        served: "подача",
+      };
+
+      const ORDER = ["idle", "heating", "cooking", "seasoning", "finishing", "served"];
+
+      function setStatus(text, mode = "info") {
+        const alertClass = mode === "error" ? "alert-danger" : mode === "ok" ? "alert-success" : "alert-secondary";
+        statusEl.textContent = text;
+        statusEl.className = `alert ${alertClass} mt-3 mb-0`;
+      }
+
+      function updateButtons(state) {
+        const process = state.state;
+        const eggBroken = Boolean(state.egg?.is_broken);
+        const eggFried = state.egg?.state === "fried";
+        const oilAdded = Boolean(state.oil_added);
+        const spicesAdded = Boolean(state.spices_added);
+
+        const enabled = {
+          heat_pan: process === "idle",
+          break_eggs: process === "heating" && !eggBroken,
+          add_oil: ["heating", "cooking", "seasoning"].includes(process) && !oilAdded,
+          add_spices: ["cooking", "seasoning"].includes(process) && !spicesAdded,
+          fry_eggs: ["cooking", "seasoning"].includes(process) && !eggFried,
+          mix_and_serve: process === "finishing" && eggFried,
+        };
+
+        document.querySelectorAll(".action-btn").forEach((button) => {
+          button.disabled = !enabled[button.dataset.action];
+        });
+      }
+
+      function updateSteps(stateValue) {
+        const currentIndex = ORDER.indexOf(stateValue);
+        document.querySelectorAll(".step").forEach((stepEl) => {
+          stepEl.classList.remove("done", "current");
+          const stepIndex = ORDER.indexOf(stepEl.dataset.step);
+          if (stepIndex >= 0 && stepIndex < currentIndex) {
+            stepEl.classList.add("done");
+          }
+          if (stepIndex === currentIndex) {
+            stepEl.classList.add("current");
+          }
+        });
+      }
+
+      function renderSnapshot(state) {
+        const stateLabel = STATE_LABELS[state.state] || state.state;
+        processStateEl.textContent = stateLabel;
+        stoveStateEl.textContent = state.stove?.is_on ? "включена" : "выключена";
+        panStateEl.textContent = state.pan?.is_hot ? "горячая" : "холодная";
+        eggStateEl.textContent = state.egg?.state === "fried" ? "жареное" : "сырое";
+        oilStateEl.textContent = state.oil_added ? "добавлено" : "нет";
+        spicesStateEl.textContent = state.spices_added ? "добавлены" : "нет";
+        updateSteps(state.state);
+        updateButtons(state);
+        snapshotEl.textContent = JSON.stringify(state, null, 2);
+      }
+
+      async function loadState() {
+        try {
+          setStatus("Загрузка состояния...");
+          const response = await fetch("/api/state");
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          const state = await response.json();
+          renderSnapshot(state);
+          setStatus("Состояние загружено.", "ok");
+        } catch (error) {
+          setStatus(`Не удалось загрузить состояние: ${error.message}`, "error");
+        }
+      }
+
+      async function executeAction(action) {
+        try {
+          const response = await fetch(`/api/actions/${action}`, { method: "POST" });
+          const payload = await response.json();
+          if (!response.ok) {
+            const message = payload?.detail || `HTTP ${response.status}`;
+            throw new Error(message);
+          }
+          renderSnapshot(payload.state);
+          setStatus(payload.message, "ok");
+        } catch (error) {
+          setStatus(`Ошибка действия: ${error.message}`, "error");
+        }
+      }
+
+      async function resetState() {
+        if (!window.confirm("Сбросить состояние и начать приготовление заново?")) {
+          return;
+        }
+        try {
+          const response = await fetch("/api/reset", { method: "POST" });
+          const payload = await response.json();
+          if (!response.ok) {
+            const message = payload?.detail || `HTTP ${response.status}`;
+            throw new Error(message);
+          }
+          renderSnapshot(payload.state);
+          setStatus(payload.message, "ok");
+        } catch (error) {
+          setStatus(`Не удалось сбросить состояние: ${error.message}`, "error");
+        }
+      }
+
+      document.querySelectorAll(".action-btn").forEach((button) => {
+        button.addEventListener("click", () => executeAction(button.dataset.action));
+      });
+      resetBtn.addEventListener("click", resetState);
+      reloadBtn.addEventListener("click", loadState);
+
+      loadState();
+    </script>
+  </body>
+</html>
+
